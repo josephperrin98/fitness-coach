@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "whoop": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "fitness_app.whoop"]
+    }
+  }
+}
