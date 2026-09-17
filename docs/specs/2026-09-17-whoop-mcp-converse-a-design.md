@@ -114,8 +114,8 @@ Knows nothing about MCP.
 
 **`whoop/server.py`** — `FastMCP("whoop")` exposing six tools with the
 same names and arguments as the client. Each trims records to the fields
-a coach uses (e.g. recovery: date, score, HRV, resting HR, sleep
-performance) and returns JSON. `AuthError` and `HttpError` propagate as
+a coach uses (e.g. recovery: date, score, HRV, resting HR, SpO2;
+sleep performance is a sleep-record field) and returns JSON. `AuthError` and `HttpError` propagate as
 tool errors with their messages intact. Knows nothing about OAuth.
 
 **`whoop/__main__.py`** — subcommands:
