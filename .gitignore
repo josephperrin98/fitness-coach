@@ -3,7 +3,6 @@
 .env.*
 !.env.example
 .data/
-CONTEXT.local.md
 
 # Python
 __pycache__/
