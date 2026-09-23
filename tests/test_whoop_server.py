@@ -1,5 +1,8 @@
 # tests/test_whoop_server.py
+import asyncio
+
 import pytest
+from mcp.server.mcpserver.exceptions import ToolError
 
 from fitness_app.whoop import auth, server
 
@@ -132,3 +135,13 @@ def test_create_server_registers_six_tools():
         "get_recovery", "get_sleep", "get_workouts", "get_cycles",
         "get_profile", "get_body_measurements",
     }
+
+
+def test_relogin_instruction_reaches_the_model_through_mcp(monkeypatch):
+    class Unauthorised:
+        def get_recovery(self, days=7):
+            raise auth.AuthError(auth.RELOGIN)
+    monkeypatch.setattr(server, "_client", lambda: Unauthorised())
+    mcp = server.create_server()
+    with pytest.raises(ToolError, match="fitness_app.whoop auth"):
+        asyncio.run(mcp.call_tool("get_recovery", {"days": 7}))

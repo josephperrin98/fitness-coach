@@ -3,15 +3,21 @@
 coach needs. Knows nothing about OAuth.
 
 Tools are plain functions registered in `create_server()` so tests can
-call them directly. Exceptions raised here become MCP error results with
-the exception message as text — that is how the re-login instruction in
-`AuthError` reaches the model.
+call them directly. mcp 2.x shows the model an exception's message only
+if it is a `ToolError`; anything else is reported as a bare crash. So
+`create_server()` re-raises the failures we expect (auth, config, HTTP) as
+`ToolError` — that is how the re-login instruction in `AuthError` reaches
+the model.
 """
 
-from mcp.server.mcpserver import MCPServer
+import functools
 
+from mcp.server.mcpserver import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
+
+from fitness_app import http
 from fitness_app.tokenstore import TokenStore
-from fitness_app.whoop.auth import WhoopConfig
+from fitness_app.whoop.auth import AuthError, ConfigError, WhoopConfig
 from fitness_app.whoop.client import WhoopClient
 
 
@@ -126,10 +132,24 @@ def get_body_measurements() -> dict:
 
 
 TOOLS = (get_recovery, get_sleep, get_workouts, get_cycles, get_profile, get_body_measurements)
+EXPECTED_ERRORS = (AuthError, ConfigError, http.HttpError)
+
+
+def _surface_errors(tool):
+    """Re-raise expected failures as `ToolError` so their message reaches the model."""
+
+    @functools.wraps(tool)
+    def wrapper(*args, **kwargs):
+        try:
+            return tool(*args, **kwargs)
+        except EXPECTED_ERRORS as e:
+            raise ToolError(str(e)) from e
+
+    return wrapper
 
 
 def create_server() -> MCPServer:
     mcp = MCPServer("whoop")
     for tool in TOOLS:
-        mcp.tool()(tool)
+        mcp.tool()(_surface_errors(tool))
     return mcp
