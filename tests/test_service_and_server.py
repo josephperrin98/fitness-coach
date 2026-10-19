@@ -79,3 +79,11 @@ def test_cli_propose_then_confirm(tmp_path, monkeypatch, capsys):
     assert main(["confirm", "1"]) == 0
     assert "confirmed" in capsys.readouterr().out
     assert main(["confirm", "1"]) == 1   # already confirmed
+
+
+def test_tools_work_through_the_server_not_just_directly(tmp_path, monkeypatch):
+    # Regression: the server runs tools on worker threads; SQLite refused cross-thread use.
+    from coach import mcp_server
+    monkeypatch.setattr(mcp_server, "coach", Coach(str(tmp_path / "server.db")))
+    result = asyncio.run(mcp_server.mcp.call_tool("get_today", {"day": "2026-10-19"}))
+    assert "Monday" in str(result)

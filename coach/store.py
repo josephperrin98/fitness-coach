@@ -59,7 +59,9 @@ class Proposal:
 class PlanStore:
     def __init__(self, path: str = ":memory:", rules: RuleSet | None = None) -> None:
         self.rules = rules or load_rules()
-        self.db = sqlite3.connect(path)
+        # The MCP server runs tools on worker threads; calls arrive one at a time from a
+        # single user, so sharing one connection across threads is safe here.
+        self.db = sqlite3.connect(path, check_same_thread=False)
         self.db.row_factory = sqlite3.Row
         self.db.executescript(SCHEMA)
 
