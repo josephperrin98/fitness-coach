@@ -126,7 +126,7 @@ def _scored(s: Session, group: list[Actual], on: date, adj: Adjustment | None,
     if penalty:
         status = "moved"
         score = max(0.0, score - penalty)
-    elif target <= 0 or abs(value - target) < 1e-9:
+    elif target <= 0 or abs(value - target) <= rules.scoring["adherence"].get("done_band", 0) * target:
         status = "done"
     else:
         status = "short" if value < target else "over"

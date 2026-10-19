@@ -135,3 +135,12 @@ def test_scoring_without_provenance_is_refused(tmp_path):
     bad.write_text(yaml.safe_dump(raw))
     with pytest.raises(ValueError, match="scoring"):
         load_rules(bad)
+
+
+def test_within_five_percent_counts_as_done_but_keeps_its_score():
+    # Regression: only an exact match was "done", so GPS data was almost never green.
+    ws = score_week(week(Session(day(0), "easy", 45), Session(day(2), "easy", 45)),
+                    [run(0, minutes=43.5), run(2, minutes=41)], as_of=day(6))
+    near, far = ws.sessions
+    assert (near.status, near.adherence) == ("done", pytest.approx(96.7, abs=0.1))
+    assert far.status == "short"

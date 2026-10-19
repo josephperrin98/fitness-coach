@@ -142,9 +142,12 @@ scoring:
     shortfall_rate: 1.0   # each 1% short of target costs 1 point
     overshoot_rate: 0.5   # each 1% over costs 0.5 points (falling short is worse)
     moved_penalty: 10     # done on another day of the same week
+    done_band: 0.05       # within 5% of target is labelled "done"; the score still counts every minute
   provenance:
     source: personal_choice
     note: >
       Asymmetric on purpose: missing volume loses the training stimulus, while
       overshooting mostly adds fatigue, which the load rules and the recovery
       views already watch. Rates are the owner's choice, not from a study.
+      The done band only changes the label: watch and GPS data never match a
+      target exactly, so an exact-match rule would never show a session as done.
