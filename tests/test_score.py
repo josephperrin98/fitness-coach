@@ -144,3 +144,11 @@ def test_within_five_percent_counts_as_done_but_keeps_its_score():
     near, far = ws.sessions
     assert (near.status, near.adherence) == ("done", pytest.approx(96.7, abs=0.1))
     assert far.status == "short"
+
+
+def test_todays_session_is_still_upcoming_until_it_is_done():
+    # Regression: at the morning check-in, today's run was already scored as missed.
+    ws = score_week(week(Session(day(0), "easy", 45), Session(day(2), "easy", 45)),
+                    [run(0, minutes=45)], as_of=day(2))
+    assert [s.status for s in ws.sessions] == ["done", "upcoming"]
+    assert ws.adherence == 100

@@ -106,7 +106,7 @@ def score_week(week: Week, actuals: list[Actual], as_of: date,
         others = sorted((k for k in pool if k[0] == family), key=lambda k: abs((k[1] - s.day).days))
         if others:
             results[i] = _scored(s, pool.pop(others[0]), others[0][1], adjustments.get(s.day), penalty, rules)
-        elif s.day > as_of:
+        elif s.day >= as_of:   # today stays open until the day is over
             results[i] = SessionScore(s.day, s.kind, s.target, s.unit, "upcoming")
         else:
             results[i] = SessionScore(s.day, s.kind, s.target, s.unit, "missed", adherence=0.0)
