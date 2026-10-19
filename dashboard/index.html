@@ -172,7 +172,7 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 
 <script>
 "use strict";
-const KIND = { easy: "Easy", quality: "Quality", long: "Long", test: "Test", football: "Football", strength: "Gym", run: "Run", ride: "Ride", walk: "Walk", kite: "Kite", racket: "Racket", other: "Other" };
+const KIND = { easy: "Easy", quality: "Quality", long: "Long", test: "Test", football: "Football", strength: "Gym", run: "Run", ride: "Ride", walk: "Walk", kite: "Kite", racket: "Racket", dance: "Dance", other: "Other" };
 const GOAL = { half: "Half marathon", marathon: "Marathon" };
 const STATUS = ["done", "short", "over", "moved", "missed", "excused", "upcoming"];
 const $ = (id) => document.getElementById(id);
@@ -239,10 +239,11 @@ function chip(s) {
 
 function doneLine(day) {
   const runs = day.done.filter((a) => a.kind === "run");
-  // Walks and commutes stay in the day detail; on the calendar they are noise, not training.
-  const other = new Set(day.done.filter((a) => !["run", "walk"].includes(a.kind) && !day.planned.some((p) => p.kind === a.kind)).map((a) => a.kind));
+  // Walks and unnamed movement stay in the day detail; on the calendar they are noise, not training.
+  const other = new Set(day.done.filter((a) => !["run", "walk", "other"].includes(a.kind) && !day.planned.some((p) => p.kind === a.kind)).map((a) => a.kind));
   const parts = [];
-  if (runs.length) parts.push(`${Math.round(runs.reduce((t, a) => t + a.minutes, 0))}′<span class="km"> · ${runs.reduce((t, a) => t + a.km, 0).toFixed(1)} km</span>`);
+  const km = runs.reduce((t, a) => t + a.km, 0);   // 0 = no GPS (a Whoop-only run), so unknown, not zero
+  if (runs.length) parts.push(`${Math.round(runs.reduce((t, a) => t + a.minutes, 0))}′${km ? `<span class="km"> · ${km.toFixed(1)} km</span>` : ""}`);
   other.forEach((k) => parts.push(`+ ${esc(KIND[k] || k)}`));
   return parts.length ? `<div class="extra">${parts.join(" ")}</div>` : "";
 }
