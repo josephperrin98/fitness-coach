@@ -10,7 +10,7 @@ Actuals come from Strava and Whoop at the moment of the call and are never store
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, datetime
 
 from .plan import Session, Week
 from .rules import RuleSet, load_rules
@@ -26,7 +26,8 @@ class Actual:
     minutes: float = 0.0
     km: float = 0.0
     zone_minutes: dict[int, float] | None = None   # Whoop heart-rate zones 0-5
-    start_hour: int | None = None
+    start: datetime | None = None   # local start time, used to join Strava and Whoop rows
+    strain: float | None = None     # Whoop strain, when Whoop saw the activity
 
 
 @dataclass(frozen=True)
