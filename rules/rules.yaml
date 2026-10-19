@@ -134,3 +134,17 @@ gates:
     provenance:
       source: personal_choice
       note: Ladder is a proposal pending professional (physio) confirmation.
+
+# Scoring: how closely the plan was followed. These numbers judge the athlete,
+# not the plan, so they never reject anything; they colour the dashboard.
+scoring:
+  adherence:
+    shortfall_rate: 1.0   # each 1% short of target costs 1 point
+    overshoot_rate: 0.5   # each 1% over costs 0.5 points (falling short is worse)
+    moved_penalty: 10     # done on another day of the same week
+  provenance:
+    source: personal_choice
+    note: >
+      Asymmetric on purpose: missing volume loses the training stimulus, while
+      overshooting mostly adds fatigue, which the load rules and the recovery
+      views already watch. Rates are the owner's choice, not from a study.
