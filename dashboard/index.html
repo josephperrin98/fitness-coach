@@ -325,7 +325,9 @@ function explain(server, e) {
   switch (e && e.code) {
     case "server_not_connected": return local ? `${name}: open this page in the Claude desktop app with the ${name} server running (see the README).` : `${name}: add it in claude.ai Settings → Connectors.`;
     case "needs_reauth": return `${name}: reconnect it in claude.ai Settings → Connectors.`;
-    case "not_in_manifest": return `${name}: turned off for this page in its permissions.`;
+    case "not_in_manifest": return local
+      ? `${name}: the running server doesn't offer this tool, or it is off in this page's permissions. After updating a local server, quit the Claude app (Cmd+Q) and reopen it.`
+      : `${name}: turned off for this page in its permissions.`;
     case "approval_required": return `${name}: needs your approval. Press Refresh to be asked again.`;
     case "cancelled": return `${name}: you declined the app's prompt.`;
     case "blocked_by_policy": return `${name}: blocked by your organisation's policy.`;
