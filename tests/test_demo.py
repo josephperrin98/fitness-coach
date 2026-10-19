@@ -23,3 +23,9 @@ def test_demo_has_check_ins_and_no_future_recovery():
     days = {d["date"]: d for d in demo_dashboard()["days"]}
     assert days[DEMO_TODAY.isoformat()]["checkin"]["decision"] == "go"
     assert all(d["recovery"] is None for k, d in days.items() if k > DEMO_TODAY.isoformat())
+
+
+def test_demo_follows_its_own_check_ins():
+    days = {d["date"]: d for d in demo_dashboard()["days"]}
+    assert days["2026-11-09"]["done"] == []                                  # rested
+    assert days["2026-11-30"]["planned"][0]["score"]["status"] == "done"     # ran the smaller target

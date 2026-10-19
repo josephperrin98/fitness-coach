@@ -21,7 +21,7 @@ from .views import dashboard
 
 DEMO_TODAY = date(2026, 12, 9)      # a Wednesday, so the current week is half done
 FIRST_MONDAY = date(2026, 10, 19)
-SEED = 7                            # fixed, so the file only changes when the code does
+SEED = 19                           # fixed, so the file only changes when the code does
 
 # (type, runs, km, quality, long_run_km, football) per week, as in examples/plan.example.yaml
 WEEKS = [
@@ -32,6 +32,11 @@ WEEKS = [
     ("foundation", 4, 28, 1, 12, 0), ("recovery", 3, 16, 0, 8, 0),
 ]
 EASY_PACE = 6.0                     # min/km, to turn easy kilometres into minutes
+CHECKINS = [
+    CheckIn(date(2026, 11, 9), "rest", "caution area 4/10: gate says stop", caution_score=4, feel=5),
+    CheckIn(date(2026, 11, 30), "modify", "recovery 28%, short sleep", caution_score=1, feel=4, adjusted_target=20),
+    CheckIn(DEMO_TODAY, "go", "recovery 71%, caution 0/10", caution_score=0, feel=8),
+]
 
 
 def demo_plan() -> Plan:
@@ -55,10 +60,15 @@ def demo_plan() -> Plan:
 def demo_actuals(plan: Plan, today: date = DEMO_TODAY, seed: int = SEED) -> list[Actual]:
     """Mostly on plan, with the usual mess: short runs, a missed one, a moved one, an extra gym day."""
     rng = random.Random(seed)
+    agreed = {c.day: c for c in CHECKINS}
     out = []
     for w in plan.weeks:
         for s in w.sessions:
-            if s.day >= today:
+            c = agreed.get(s.day)
+            if s.day >= today or (c and c.decision == "rest"):
+                continue
+            if c and c.decision == "modify" and s.is_run:   # did the smaller session that was agreed
+                out.append(_actual(s, s.day, c.adjusted_target / s.target, rng))
                 continue
             roll = rng.random()
             if roll < 0.06:
@@ -108,10 +118,8 @@ def demo_recoveries(actuals: list[Actual], start: date, end: date, seed: int = S
 
 def demo_checkins(plan: Plan) -> CheckInStore:
     store = CheckInStore(":memory:")
-    store.record(CheckIn(date(2026, 11, 9), "rest", "caution area 4/10: gate says stop", caution_score=4, feel=5), plan)
-    store.record(CheckIn(date(2026, 11, 30), "modify", "recovery 28%, short sleep", caution_score=1, feel=4,
-                         adjusted_target=20), plan)
-    store.record(CheckIn(DEMO_TODAY, "go", "recovery 71%, caution 0/10", caution_score=0, feel=8), plan)
+    for c in CHECKINS:
+        store.record(c, plan)
     return store
 
 

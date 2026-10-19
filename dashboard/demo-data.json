@@ -17,11 +17,11 @@
      "note": "",
      "score": {
       "planned": 30,
-      "status": "over",
-      "actual": 31.8,
+      "status": "done",
+      "actual": 30.6,
       "actual_day": "2026-10-19",
-      "adherence": 97.0,
-      "execution": 97.8,
+      "adherence": 99.0,
+      "execution": 84.6,
       "adjusted": false
      }
     }
@@ -29,14 +29,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 31.8,
-     "km": 5.3,
-     "strain": 10.7
+     "minutes": 30.6,
+     "km": 5.1,
+     "strain": 10.6
     }
    ],
    "checkin": null,
-   "recovery": 86,
-   "hrv": 73.9
+   "recovery": 75,
+   "hrv": 78.3
   },
   {
    "date": "2026-10-20",
@@ -46,12 +46,12 @@
      "kind": "strength",
      "minutes": 45,
      "km": 0,
-     "strain": 8.5
+     "strain": 6.9
     }
    ],
    "checkin": null,
-   "recovery": 77,
-   "hrv": 74.6
+   "recovery": 38,
+   "hrv": 58.4
   },
   {
    "date": "2026-10-21",
@@ -64,11 +64,11 @@
      "note": "",
      "score": {
       "planned": 30,
-      "status": "over",
-      "actual": 32.5,
+      "status": "short",
+      "actual": 27.5,
       "actual_day": "2026-10-21",
-      "adherence": 95.8,
-      "execution": 88.9,
+      "adherence": 91.7,
+      "execution": 70.2,
       "adjusted": false
      }
     }
@@ -76,22 +76,22 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 32.5,
-     "km": 5.42,
-     "strain": 10.7
+     "minutes": 27.5,
+     "km": 4.58,
+     "strain": 10.3
     }
    ],
    "checkin": null,
-   "recovery": 73,
-   "hrv": 74.9
+   "recovery": 78,
+   "hrv": 80.4
   },
   {
    "date": "2026-10-22",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 45,
-   "hrv": 64.7
+   "recovery": 43,
+   "hrv": 68.1
   },
   {
    "date": "2026-10-23",
@@ -104,27 +104,34 @@
      "note": "",
      "score": {
       "planned": 90,
-      "status": "missed",
-      "actual": 0.0,
-      "actual_day": null,
-      "adherence": 0.0,
+      "status": "done",
+      "actual": 93,
+      "actual_day": "2026-10-23",
+      "adherence": 98.3,
       "execution": null,
       "adjusted": false
      }
     }
    ],
-   "done": [],
+   "done": [
+    {
+     "kind": "football",
+     "minutes": 93,
+     "km": 0,
+     "strain": 14.0
+    }
+   ],
    "checkin": null,
-   "recovery": 85,
-   "hrv": 75.3
+   "recovery": 78,
+   "hrv": 75.5
   },
   {
    "date": "2026-10-24",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 76,
-   "hrv": 73.9
+   "recovery": 51,
+   "hrv": 63.7
   },
   {
    "date": "2026-10-25",
@@ -137,11 +144,11 @@
      "note": "",
      "score": {
       "planned": 8,
-      "status": "over",
-      "actual": 8.6,
+      "status": "done",
+      "actual": 8.3,
       "actual_day": "2026-10-25",
-      "adherence": 96.4,
-      "execution": 97.2,
+      "adherence": 97.8,
+      "execution": 96.7,
       "adjusted": false
      }
     }
@@ -149,14 +156,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 49.7,
-     "km": 8.58,
+     "minutes": 49.2,
+     "km": 8.35,
      "strain": 12.1
     }
    ],
    "checkin": null,
-   "recovery": 55,
-   "hrv": 63.0
+   "recovery": 72,
+   "hrv": 75.8
   },
   {
    "date": "2026-10-26",
@@ -169,11 +176,11 @@
      "note": "",
      "score": {
       "planned": 35,
-      "status": "short",
-      "actual": 25.2,
+      "status": "done",
+      "actual": 35.3,
       "actual_day": "2026-10-26",
-      "adherence": 72.0,
-      "execution": 93.3,
+      "adherence": 99.6,
+      "execution": 94.1,
       "adjusted": false
      }
     }
@@ -181,29 +188,22 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 25.2,
-     "km": 4.2,
-     "strain": 10.1
+     "minutes": 35.3,
+     "km": 5.88,
+     "strain": 10.9
     }
    ],
    "checkin": null,
-   "recovery": 60,
-   "hrv": 69.2
+   "recovery": 67,
+   "hrv": 70.6
   },
   {
    "date": "2026-10-27",
    "planned": [],
-   "done": [
-    {
-     "kind": "strength",
-     "minutes": 45,
-     "km": 0,
-     "strain": 6.4
-    }
-   ],
+   "done": [],
    "checkin": null,
-   "recovery": 79,
-   "hrv": 76.1
+   "recovery": 76,
+   "hrv": 74.5
   },
   {
    "date": "2026-10-28",
@@ -217,10 +217,10 @@
      "score": {
       "planned": 35,
       "status": "done",
-      "actual": 35.6,
+      "actual": 35.9,
       "actual_day": "2026-10-28",
-      "adherence": 99.1,
-      "execution": 71.6,
+      "adherence": 98.7,
+      "execution": 88.3,
       "adjusted": false
      }
     }
@@ -228,38 +228,38 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 35.6,
-     "km": 5.93,
+     "minutes": 35.9,
+     "km": 5.98,
      "strain": 11.0
     }
    ],
    "checkin": null,
-   "recovery": 73,
-   "hrv": 77.1
+   "recovery": 72,
+   "hrv": 72.5
   },
   {
    "date": "2026-10-29",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 45,
-   "hrv": 61.5
+   "recovery": 66,
+   "hrv": 67.1
   },
   {
    "date": "2026-10-30",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 61,
-   "hrv": 68.2
+   "recovery": 81,
+   "hrv": 74.1
   },
   {
    "date": "2026-10-31",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 76,
-   "hrv": 77.5
+   "recovery": 69,
+   "hrv": 74.2
   },
   {
    "date": "2026-11-01",
@@ -272,11 +272,11 @@
      "note": "",
      "score": {
       "planned": 9,
-      "status": "short",
-      "actual": 7.6,
+      "status": "done",
+      "actual": 9.2,
       "actual_day": "2026-11-01",
-      "adherence": 84.8,
-      "execution": 74.1,
+      "adherence": 98.8,
+      "execution": 78.1,
       "adjusted": false
      }
     }
@@ -284,14 +284,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 44.1,
-     "km": 7.63,
-     "strain": 11.7
+     "minutes": 53.5,
+     "km": 9.21,
+     "strain": 12.5
     }
    ],
    "checkin": null,
-   "recovery": 82,
-   "hrv": 83.3
+   "recovery": 66,
+   "hrv": 72.8
   },
   {
    "date": "2026-11-02",
@@ -305,10 +305,10 @@
      "score": {
       "planned": 35,
       "status": "short",
-      "actual": 25.2,
+      "actual": 32.6,
       "actual_day": "2026-11-02",
-      "adherence": 72.0,
-      "execution": 90.9,
+      "adherence": 93.1,
+      "execution": 80.4,
       "adjusted": false
      }
     }
@@ -316,14 +316,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 25.2,
-     "km": 4.2,
-     "strain": 10.1
+     "minutes": 32.6,
+     "km": 5.43,
+     "strain": 10.7
     }
    ],
    "checkin": null,
-   "recovery": 62,
-   "hrv": 70.9
+   "recovery": 73,
+   "hrv": 71.8
   },
   {
    "date": "2026-11-03",
@@ -333,12 +333,12 @@
      "kind": "strength",
      "minutes": 45,
      "km": 0,
-     "strain": 8.0
+     "strain": 7.9
     }
    ],
    "checkin": null,
-   "recovery": 86,
-   "hrv": 77.7
+   "recovery": 59,
+   "hrv": 65.8
   },
   {
    "date": "2026-11-04",
@@ -352,9 +352,9 @@
      "score": {
       "planned": 50,
       "status": "over",
-      "actual": 55.8,
+      "actual": 55.7,
       "actual_day": "2026-11-04",
-      "adherence": 94.2,
+      "adherence": 94.3,
       "execution": null,
       "adjusted": false
      }
@@ -363,22 +363,22 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 55.8,
-     "km": 11.39,
+     "minutes": 55.7,
+     "km": 11.37,
      "strain": 15.6
     }
    ],
    "checkin": null,
-   "recovery": 86,
-   "hrv": 78.3
+   "recovery": 55,
+   "hrv": 67.0
   },
   {
    "date": "2026-11-05",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 29,
-   "hrv": 52.0
+   "recovery": 76,
+   "hrv": 73.5
   },
   {
    "date": "2026-11-06",
@@ -392,9 +392,9 @@
      "score": {
       "planned": 90,
       "status": "short",
-      "actual": 65,
+      "actual": 84,
       "actual_day": "2026-11-06",
-      "adherence": 72.2,
+      "adherence": 93.3,
       "execution": null,
       "adjusted": false
      }
@@ -403,22 +403,22 @@
    "done": [
     {
      "kind": "football",
-     "minutes": 65,
+     "minutes": 84,
      "km": 0,
-     "strain": 15.3
+     "strain": 16.8
     }
    ],
    "checkin": null,
-   "recovery": 72,
-   "hrv": 72.9
+   "recovery": 81,
+   "hrv": 78.6
   },
   {
    "date": "2026-11-07",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 60,
-   "hrv": 62.9
+   "recovery": 46,
+   "hrv": 64.4
   },
   {
    "date": "2026-11-08",
@@ -432,10 +432,10 @@
      "score": {
       "planned": 10,
       "status": "short",
-      "actual": 9.4,
+      "actual": 8.9,
       "actual_day": "2026-11-08",
-      "adherence": 93.9,
-      "execution": 98.2,
+      "adherence": 89.1,
+      "execution": 88.3,
       "adjusted": false
      }
     }
@@ -443,14 +443,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 54.4,
-     "km": 9.39,
-     "strain": 12.5
+     "minutes": 54.7,
+     "km": 8.91,
+     "strain": 12.6
     }
    ],
    "checkin": null,
-   "recovery": 50,
-   "hrv": 64.2
+   "recovery": 44,
+   "hrv": 57.6
   },
   {
    "date": "2026-11-09",
@@ -472,29 +472,29 @@
      }
     }
    ],
-   "done": [
-    {
-     "kind": "run",
-     "minutes": 42.5,
-     "km": 7.08,
-     "strain": 11.5
-    }
-   ],
+   "done": [],
    "checkin": {
     "decision": "rest",
     "reason": "caution area 4/10: gate says stop",
     "adjusted_target": null
    },
-   "recovery": 70,
-   "hrv": 70.7
+   "recovery": 53,
+   "hrv": 64.9
   },
   {
    "date": "2026-11-10",
    "planned": [],
-   "done": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 6.4
+    }
+   ],
    "checkin": null,
-   "recovery": 64,
-   "hrv": 67.6
+   "recovery": 58,
+   "hrv": 69.5
   },
   {
    "date": "2026-11-11",
@@ -507,50 +507,50 @@
      "note": "6 x 3 min at threshold",
      "score": {
       "planned": 50,
-      "status": "short",
-      "actual": 47.2,
-      "actual_day": "2026-11-11",
-      "adherence": 94.4,
+      "status": "moved",
+      "actual": 36.0,
+      "actual_day": "2026-11-12",
+      "adherence": 62.0,
       "execution": null,
       "adjusted": false
      }
     }
    ],
-   "done": [
-    {
-     "kind": "run",
-     "minutes": 47.2,
-     "km": 9.63,
-     "strain": 14.9
-    }
-   ],
+   "done": [],
    "checkin": null,
-   "recovery": 84,
-   "hrv": 78.6
+   "recovery": 32,
+   "hrv": 59.8
   },
   {
    "date": "2026-11-12",
    "planned": [],
-   "done": [],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 36.0,
+     "km": 7.35,
+     "strain": 14.0
+    }
+   ],
    "checkin": null,
-   "recovery": 48,
-   "hrv": 62.0
+   "recovery": 85,
+   "hrv": 79.0
   },
   {
    "date": "2026-11-13",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 46,
-   "hrv": 60.4
+   "recovery": 60,
+   "hrv": 69.1
   },
   {
    "date": "2026-11-14",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 68,
-   "hrv": 71.7
+   "recovery": 65,
+   "hrv": 72.0
   },
   {
    "date": "2026-11-15",
@@ -564,10 +564,10 @@
      "score": {
       "planned": 11,
       "status": "done",
-      "actual": 11.2,
+      "actual": 10.7,
       "actual_day": "2026-11-15",
-      "adherence": 99.1,
-      "execution": 92.7,
+      "adherence": 96.8,
+      "execution": 86.3,
       "adjusted": false
      }
     }
@@ -575,14 +575,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 68.2,
-     "km": 11.19,
-     "strain": 13.7
+     "minutes": 61.4,
+     "km": 10.65,
+     "strain": 13.1
     }
    ],
    "checkin": null,
-   "recovery": 61,
-   "hrv": 67.4
+   "recovery": 69,
+   "hrv": 74.1
   },
   {
    "date": "2026-11-16",
@@ -595,11 +595,11 @@
      "note": "",
      "score": {
       "planned": 20,
-      "status": "over",
-      "actual": 21.6,
+      "status": "short",
+      "actual": 18.7,
       "actual_day": "2026-11-16",
-      "adherence": 96.0,
-      "execution": 91.2,
+      "adherence": 93.5,
+      "execution": 73.3,
       "adjusted": false
      }
     }
@@ -607,22 +607,29 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 21.6,
-     "km": 3.6,
-     "strain": 9.8
+     "minutes": 18.7,
+     "km": 3.12,
+     "strain": 9.6
     }
    ],
    "checkin": null,
-   "recovery": 61,
-   "hrv": 66.3
+   "recovery": 58,
+   "hrv": 67.5
   },
   {
    "date": "2026-11-17",
    "planned": [],
-   "done": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 6.4
+    }
+   ],
    "checkin": null,
-   "recovery": 62,
-   "hrv": 71.7
+   "recovery": 77,
+   "hrv": 76.1
   },
   {
    "date": "2026-11-18",
@@ -635,11 +642,11 @@
      "note": "",
      "score": {
       "planned": 20,
-      "status": "short",
-      "actual": 18.4,
+      "status": "done",
+      "actual": 20.0,
       "actual_day": "2026-11-18",
-      "adherence": 92.0,
-      "execution": 96.2,
+      "adherence": 100.0,
+      "execution": 73.5,
       "adjusted": false
      }
     }
@@ -647,38 +654,38 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 18.4,
-     "km": 3.07,
-     "strain": 9.5
+     "minutes": 20.0,
+     "km": 3.33,
+     "strain": 9.7
     }
    ],
    "checkin": null,
-   "recovery": 72,
-   "hrv": 73.7
+   "recovery": 54,
+   "hrv": 68.9
   },
   {
    "date": "2026-11-19",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 65,
-   "hrv": 74.1
+   "recovery": 74,
+   "hrv": 73.4
   },
   {
    "date": "2026-11-20",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 51,
-   "hrv": 64.2
+   "recovery": 64,
+   "hrv": 69.3
   },
   {
    "date": "2026-11-21",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 70,
-   "hrv": 71.8
+   "recovery": 72,
+   "hrv": 75.4
   },
   {
    "date": "2026-11-22",
@@ -691,11 +698,11 @@
      "note": "",
      "score": {
       "planned": 7,
-      "status": "done",
-      "actual": 7.0,
+      "status": "over",
+      "actual": 7.5,
       "actual_day": "2026-11-22",
-      "adherence": 99.9,
-      "execution": 98.8,
+      "adherence": 96.6,
+      "execution": 78.8,
       "adjusted": false
      }
     }
@@ -703,14 +710,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 42.0,
-     "km": 7.01,
-     "strain": 11.5
+     "minutes": 43.4,
+     "km": 7.47,
+     "strain": 11.6
     }
    ],
    "checkin": null,
-   "recovery": 62,
-   "hrv": 67.1
+   "recovery": 73,
+   "hrv": 77.5
   },
   {
    "date": "2026-11-23",
@@ -724,10 +731,10 @@
      "score": {
       "planned": 35,
       "status": "done",
-      "actual": 33.6,
+      "actual": 35.4,
       "actual_day": "2026-11-23",
-      "adherence": 96.0,
-      "execution": 82.7,
+      "adherence": 99.4,
+      "execution": 87.9,
       "adjusted": false
      }
     }
@@ -735,22 +742,29 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 33.6,
-     "km": 5.6,
-     "strain": 10.8
+     "minutes": 35.4,
+     "km": 5.9,
+     "strain": 10.9
     }
    ],
    "checkin": null,
-   "recovery": 50,
-   "hrv": 63.5
+   "recovery": 62,
+   "hrv": 68.2
   },
   {
    "date": "2026-11-24",
    "planned": [],
-   "done": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 6.2
+    }
+   ],
    "checkin": null,
-   "recovery": 61,
-   "hrv": 70.7
+   "recovery": 50,
+   "hrv": 60.8
   },
   {
    "date": "2026-11-25",
@@ -763,11 +777,11 @@
      "note": "",
      "score": {
       "planned": 35,
-      "status": "done",
-      "actual": 33.5,
+      "status": "short",
+      "actual": 33.0,
       "actual_day": "2026-11-25",
-      "adherence": 95.7,
-      "execution": 82.1,
+      "adherence": 94.3,
+      "execution": 79.7,
       "adjusted": false
      }
     }
@@ -775,22 +789,22 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 33.5,
-     "km": 5.58,
+     "minutes": 33.0,
+     "km": 5.5,
      "strain": 10.8
     }
    ],
    "checkin": null,
-   "recovery": 75,
-   "hrv": 71.1
+   "recovery": 59,
+   "hrv": 69.7
   },
   {
    "date": "2026-11-26",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 74,
-   "hrv": 75.5
+   "recovery": 56,
+   "hrv": 67.9
   },
   {
    "date": "2026-11-27",
@@ -803,34 +817,27 @@
      "note": "",
      "score": {
       "planned": 90,
-      "status": "over",
-      "actual": 99,
-      "actual_day": "2026-11-27",
-      "adherence": 95.0,
+      "status": "missed",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": 0.0,
       "execution": null,
       "adjusted": false
      }
     }
    ],
-   "done": [
-    {
-     "kind": "football",
-     "minutes": 99,
-     "km": 0,
-     "strain": 14.8
-    }
-   ],
+   "done": [],
    "checkin": null,
-   "recovery": 90,
-   "hrv": 83.9
+   "recovery": 77,
+   "hrv": 82.1
   },
   {
    "date": "2026-11-28",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 37,
-   "hrv": 59.9
+   "recovery": 58,
+   "hrv": 64.4
   },
   {
    "date": "2026-11-29",
@@ -843,11 +850,11 @@
      "note": "",
      "score": {
       "planned": 9,
-      "status": "over",
-      "actual": 9.7,
+      "status": "done",
+      "actual": 9.1,
       "actual_day": "2026-11-29",
-      "adherence": 96.3,
-      "execution": 98.1,
+      "adherence": 99.3,
+      "execution": 77.5,
       "adjusted": false
      }
     }
@@ -855,13 +862,13 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 58.8,
-     "km": 9.67,
-     "strain": 12.9
+     "minutes": 55.6,
+     "km": 9.13,
+     "strain": 12.6
     }
    ],
    "checkin": null,
-   "recovery": 74,
+   "recovery": 65,
    "hrv": 72.5
   },
   {
@@ -875,11 +882,11 @@
      "note": "",
      "score": {
       "planned": 20.0,
-      "status": "over",
-      "actual": 29.2,
+      "status": "done",
+      "actual": 20.0,
       "actual_day": "2026-11-30",
-      "adherence": 77.0,
-      "execution": 70.2,
+      "adherence": 100.0,
+      "execution": 85.0,
       "adjusted": true
      }
     }
@@ -887,9 +894,9 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 29.2,
-     "km": 4.87,
-     "strain": 10.4
+     "minutes": 20.0,
+     "km": 3.33,
+     "strain": 9.7
     }
    ],
    "checkin": {
@@ -897,8 +904,8 @@
     "reason": "recovery 28%, short sleep",
     "adjusted_target": 20.0
    },
-   "recovery": 52,
-   "hrv": 64.1
+   "recovery": 66,
+   "hrv": 73.7
   },
   {
    "date": "2026-12-01",
@@ -908,12 +915,12 @@
      "kind": "strength",
      "minutes": 45,
      "km": 0,
-     "strain": 6.7
+     "strain": 7.9
     }
    ],
    "checkin": null,
-   "recovery": 66,
-   "hrv": 72.3
+   "recovery": 44,
+   "hrv": 68.1
   },
   {
    "date": "2026-12-02",
@@ -926,10 +933,10 @@
      "note": "6 x 3 min at threshold",
      "score": {
       "planned": 50,
-      "status": "done",
-      "actual": 49.3,
+      "status": "over",
+      "actual": 53.7,
       "actual_day": "2026-12-02",
-      "adherence": 98.6,
+      "adherence": 96.3,
       "execution": null,
       "adjusted": false
      }
@@ -938,14 +945,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 49.3,
-     "km": 10.06,
-     "strain": 15.1
+     "minutes": 53.7,
+     "km": 10.96,
+     "strain": 15.5
     }
    ],
    "checkin": null,
-   "recovery": 63,
-   "hrv": 68.3
+   "recovery": 62,
+   "hrv": 71.3
   },
   {
    "date": "2026-12-03",
@@ -958,11 +965,11 @@
      "note": "",
      "score": {
       "planned": 20,
-      "status": "over",
-      "actual": 21.3,
+      "status": "done",
+      "actual": 20.2,
       "actual_day": "2026-12-03",
-      "adherence": 96.8,
-      "execution": 99.5,
+      "adherence": 99.5,
+      "execution": 97.5,
       "adjusted": false
      }
     }
@@ -970,30 +977,30 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 21.3,
-     "km": 3.55,
-     "strain": 9.8
+     "minutes": 20.2,
+     "km": 3.37,
+     "strain": 9.7
     }
    ],
    "checkin": null,
-   "recovery": 55,
-   "hrv": 67.5
+   "recovery": 83,
+   "hrv": 73.1
   },
   {
    "date": "2026-12-04",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 51,
-   "hrv": 68.8
+   "recovery": 83,
+   "hrv": 78.2
   },
   {
    "date": "2026-12-05",
    "planned": [],
    "done": [],
    "checkin": null,
-   "recovery": 62,
-   "hrv": 71.3
+   "recovery": 53,
+   "hrv": 68.5
   },
   {
    "date": "2026-12-06",
@@ -1006,11 +1013,11 @@
      "note": "",
      "score": {
       "planned": 10,
-      "status": "done",
-      "actual": 10.2,
+      "status": "short",
+      "actual": 7.2,
       "actual_day": "2026-12-06",
-      "adherence": 99.2,
-      "execution": 76.9,
+      "adherence": 72.0,
+      "execution": 85.9,
       "adjusted": false
      }
     }
@@ -1018,14 +1025,14 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 58.9,
-     "km": 10.17,
-     "strain": 12.9
+     "minutes": 42.5,
+     "km": 7.2,
+     "strain": 11.5
     }
    ],
    "checkin": null,
-   "recovery": 99,
-   "hrv": 82.9
+   "recovery": 66,
+   "hrv": 69.4
   },
   {
    "date": "2026-12-07",
@@ -1039,10 +1046,10 @@
      "score": {
       "planned": 30,
       "status": "done",
-      "actual": 30.9,
+      "actual": 29.7,
       "actual_day": "2026-12-07",
-      "adherence": 98.5,
-      "execution": 73.8,
+      "adherence": 99.0,
+      "execution": 80.5,
       "adjusted": false
      }
     }
@@ -1050,29 +1057,22 @@
    "done": [
     {
      "kind": "run",
-     "minutes": 30.9,
-     "km": 5.15,
-     "strain": 10.6
+     "minutes": 29.7,
+     "km": 4.95,
+     "strain": 10.5
     }
    ],
    "checkin": null,
-   "recovery": 42,
-   "hrv": 60.7
+   "recovery": 68,
+   "hrv": 70.4
   },
   {
    "date": "2026-12-08",
    "planned": [],
-   "done": [
-    {
-     "kind": "strength",
-     "minutes": 45,
-     "km": 0,
-     "strain": 7.3
-    }
-   ],
+   "done": [],
    "checkin": null,
-   "recovery": 70,
-   "hrv": 69.9
+   "recovery": 63,
+   "hrv": 72.4
   },
   {
    "date": "2026-12-09",
@@ -1085,10 +1085,10 @@
      "note": "6 x 3 min at threshold",
      "score": {
       "planned": 50,
-      "status": "missed",
+      "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
-      "adherence": 0.0,
+      "adherence": null,
       "execution": null,
       "adjusted": false
      }
@@ -1100,8 +1100,8 @@
     "reason": "recovery 71%, caution 0/10",
     "adjusted_target": null
    },
-   "recovery": 60,
-   "hrv": 64.8
+   "recovery": 88,
+   "hrv": 81.0
   },
   {
    "date": "2026-12-10",
@@ -1423,72 +1423,72 @@
    "start": "2026-10-19",
    "type": "foundation",
    "planned_km": 18,
-   "actual_km": 19.3,
-   "adherence": 72.3,
-   "execution": 94.6,
-   "football": 0
+   "actual_km": 18.0,
+   "adherence": 96.7,
+   "execution": 83.8,
+   "football": 1
   },
   {
    "start": "2026-10-26",
    "type": "foundation",
    "planned_km": 20,
-   "actual_km": 17.8,
-   "adherence": 85.3,
-   "execution": 79.7,
+   "actual_km": 21.1,
+   "adherence": 99.0,
+   "execution": 86.8,
    "football": 0
   },
   {
    "start": "2026-11-02",
    "type": "foundation",
    "planned_km": 22,
-   "actual_km": 25.0,
-   "adherence": 83.1,
-   "execution": 94.6,
+   "actual_km": 25.7,
+   "adherence": 92.4,
+   "execution": 84.3,
    "football": 1
   },
   {
    "start": "2026-11-09",
    "type": "foundation",
    "planned_km": 24,
-   "actual_km": 27.9,
-   "adherence": 96.8,
-   "execution": 92.7,
+   "actual_km": 18.0,
+   "adherence": 79.4,
+   "execution": 86.3,
    "football": 0
   },
   {
    "start": "2026-11-16",
    "type": "recovery",
    "planned_km": 14,
-   "actual_km": 13.7,
-   "adherence": 96.0,
-   "execution": 95.4,
+   "actual_km": 13.9,
+   "adherence": 96.7,
+   "execution": 75.2,
    "football": 0
   },
   {
    "start": "2026-11-23",
    "type": "foundation",
    "planned_km": 21,
-   "actual_km": 20.9,
-   "adherence": 95.8,
-   "execution": 87.6,
-   "football": 1
+   "actual_km": 20.5,
+   "adherence": 73.2,
+   "execution": 81.7,
+   "football": 0
   },
   {
    "start": "2026-11-30",
    "type": "foundation",
    "planned_km": 24,
-   "actual_km": 28.6,
-   "adherence": 92.9,
-   "execution": 82.2,
+   "actual_km": 24.9,
+   "adherence": 92.0,
+   "execution": 89.5,
    "football": 0
   },
   {
    "start": "2026-12-07",
    "type": "foundation",
    "planned_km": 26,
-   "actual_km": 5.2,
-   "adherence": 49.2,
-   "execution": 73.8,
+   "actual_km": 5.0,
+   "adherence": 99.0,
+   "execution": 80.5,
    "football": 0
   },
   {
@@ -1511,48 +1511,55 @@
   }
  ],
  "activity_cost": {
-  "baseline_hrv": 70.8,
+  "baseline_hrv": 71.5,
   "rows": [
-   {
-    "kind": "run: quality",
-    "n": 3,
-    "hrv_change_pct": -14.5,
-    "next_recovery": 44,
-    "enough": false
-   },
    {
     "kind": "football",
     "n": 2,
-    "hrv_change_pct": -13.3,
+    "hrv_change_pct": -10.5,
     "next_recovery": 48.5,
     "enough": false
    },
    {
-    "kind": "run: long",
-    "n": 7,
-    "hrv_change_pct": -6.1,
-    "next_recovery": 56.7,
-    "enough": true
+    "kind": "run",
+    "n": 1,
+    "hrv_change_pct": -3.4,
+    "next_recovery": 60,
+    "enough": false
    },
    {
     "kind": "run: easy",
-    "n": 13,
-    "hrv_change_pct": 0.5,
-    "next_recovery": 65,
-    "enough": true
-   },
-   {
-    "kind": "rest",
-    "n": 22,
-    "hrv_change_pct": 2.0,
-    "next_recovery": 70.8,
+    "n": 12,
+    "hrv_change_pct": -3.2,
+    "next_recovery": 60.8,
     "enough": true
    },
    {
     "kind": "strength",
-    "n": 5,
-    "hrv_change_pct": 2.7,
-    "next_recovery": 71,
+    "n": 6,
+    "hrv_change_pct": -2.8,
+    "next_recovery": 56.7,
+    "enough": true
+   },
+   {
+    "kind": "run: long",
+    "n": 7,
+    "hrv_change_pct": -2.7,
+    "next_recovery": 63.9,
+    "enough": true
+   },
+   {
+    "kind": "run: quality",
+    "n": 2,
+    "hrv_change_pct": 2.4,
+    "next_recovery": 79.5,
+    "enough": false
+   },
+   {
+    "kind": "rest",
+    "n": 22,
+    "hrv_change_pct": 2.5,
+    "next_recovery": 69.6,
     "enough": true
    }
   ],
