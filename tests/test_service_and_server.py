@@ -97,3 +97,25 @@ def test_reads_are_annotated_read_only_and_writes_are_not():
     assert all(hints[n] for n in ("get_today", "check_gate", "score_week", "dashboard_data",
                                   "list_pending_proposals"))
     assert not hints["record_check_in"] and not hints["propose_plan_change"]
+
+
+def test_dashboard_data_accepts_what_the_page_sends(tmp_path, monkeypatch):
+    # The contract with dashboard/index.html: Strava's {"activities": [...]} and Whoop's lists,
+    # each as a JSON string; the answer comes back as {"result": "<json>"} for the page to unwrap.
+    from coach import mcp_server
+    monkeypatch.setattr(mcp_server, "coach", Coach(str(tmp_path / "server.db")))
+    mcp_server.coach.confirm(mcp_server.coach.propose(PLAN, "seed", author="user")["version"], set())
+    page_input = {
+        "strava_activities": json.dumps({"activities": [{"sport_type": "Run", "start_local": "2026-10-19T07:00:00",
+                                                         "summary": {"distance": 7500, "moving_time": 2700}}]}),
+        "whoop_workouts": json.dumps([{"start": "2026-10-19T07:02:00", "sport": "running", "minutes": 44,
+                                       "strain": 9.1, "zone_minutes": {"2": 40, "3": 4}}]),
+        "whoop_recovery": json.dumps([{"date": "2026-10-20", "recovery": 70, "hrv": 65.0}]),
+        "today": "2026-10-20", "weeks_back": 1, "weeks_ahead": 0,
+    }
+    result = asyncio.run(mcp_server.mcp.call_tool("dashboard_data", page_input))
+    d = json.loads(result.structured_content["result"])
+    monday = d["days"][0]
+    assert monday["planned"][0]["score"]["status"] == "done"
+    assert monday["planned"][0]["score"]["execution"] == pytest.approx(90.9, abs=0.1)
+    assert d["days"][1]["recovery"] == 70
