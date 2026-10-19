@@ -238,10 +238,11 @@ function chip(s) {
 
 function doneLine(day) {
   const runs = day.done.filter((a) => a.kind === "run");
-  const other = day.done.filter((a) => a.kind !== "run" && !day.planned.some((p) => p.kind === a.kind));
+  // Walks and commutes stay in the day detail; on the calendar they are noise, not training.
+  const other = new Set(day.done.filter((a) => !["run", "walk"].includes(a.kind) && !day.planned.some((p) => p.kind === a.kind)).map((a) => a.kind));
   const parts = [];
   if (runs.length) parts.push(`${Math.round(runs.reduce((t, a) => t + a.minutes, 0))}′<span class="km"> · ${runs.reduce((t, a) => t + a.km, 0).toFixed(1)} km</span>`);
-  other.forEach((a) => parts.push(`+ ${esc(KIND[a.kind] || a.kind)}`));
+  other.forEach((k) => parts.push(`+ ${esc(KIND[k] || k)}`));
   return parts.length ? `<div class="extra">${parts.join(" ")}</div>` : "";
 }
 
