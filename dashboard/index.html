@@ -182,7 +182,8 @@ const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate(
 const parse = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
 const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
 const fmt = (s, opts) => parse(s).toLocaleDateString("en-GB", opts);
-const target = (t, unit) => unit === "km" ? `${+t} km` : `${+t}′`;
+// No target (gym, football) means "turn up": show nothing rather than "0′".
+const target = (t, unit) => !+t ? "" : unit === "km" ? `${+t} km` : `${+t}′`;
 const recBand = (r) => r == null ? "" : r >= 67 ? "hi" : r >= 34 ? "mid" : "lo";   // Whoop's own colour bands
 
 let data = null, selected = null, liveShown = false;
@@ -231,7 +232,7 @@ function renderWeeks(d) {
 function chip(s) {
   const sc = s.score || { status: "upcoming" };
   const [t, u] = sc.adjusted ? [sc.planned, sc.unit] : [s.target, s.unit];
-  const st = sc.status, tgt = u === "km" ? `${+t}<span class="km"> km</span>` : esc(target(t, u));
+  const st = sc.status, tgt = u === "km" && +t ? `${+t}<span class="km"> km</span>` : esc(target(t, u));
   const score = sc.adherence != null && st !== "upcoming" && st !== "excused" ? `<span class="sc">${Math.round(sc.adherence)}</span>` : "";
   return `<div class="chip st-${st}" data-k="${esc((KIND[s.kind] || s.kind)[0])}">${score}<b>${esc(KIND[s.kind] || s.kind)}</b> ${st === "excused" ? "rest" : tgt}</div>`;
 }
