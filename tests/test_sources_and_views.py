@@ -51,7 +51,8 @@ def test_unknown_sport_is_other():
 def test_sports_seen_in_real_data_have_a_kind():
     # Names as the connectors actually send them, so the calendar stops saying "Other".
     strava = {"Kitesurf": "kite", "Walk": "walk", "Hike": "walk"}
-    whoop = {"walking": "walk", "commuting": "walk", "kiteboarding": "kite", "paddle-tennis": "racket"}
+    whoop = {"walking": "walk", "commuting": "walk", "kiteboarding": "kite", "paddle-tennis": "racket",
+             "dance": "dance", "activity": "other"}
     for sport, kind in strava.items():
         row = {"sport_type": sport, "start_local": "2026-10-19T10:00:00", "summary": {}}
         assert actuals_from_strava([row])[0].kind == kind, sport

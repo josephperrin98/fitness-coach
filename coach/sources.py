@@ -28,6 +28,8 @@ WHOOP_KINDS = {
     "walking": "walk", "commuting": "walk",
     "kiteboarding": "kite",
     "paddle-tennis": "racket", "tennis": "racket", "squash": "racket", "padel": "racket",
+    "dance": "dance",
+    "activity": "other",   # Whoop's own catch-all for movement it detected but could not name
 }
 MATCH_WINDOW_MIN = 30   # same activity if the two starts are this close
 
