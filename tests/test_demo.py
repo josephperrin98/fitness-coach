@@ -1,0 +1,25 @@
+"""The demo data runs through the real scoring code and tells a story worth showing."""
+from coach.demo import DEMO_TODAY, demo_dashboard
+
+
+def test_demo_covers_ten_weeks_with_past_and_future():
+    d = demo_dashboard()
+    assert len(d["days"]) == 70 and len(d["weeks"]) == 10
+    statuses = {s["score"]["status"] for day in d["days"] for s in day["planned"] if "score" in s}
+    assert {"done", "short", "missed", "upcoming"} <= statuses
+
+
+def test_demo_is_deterministic():
+    assert demo_dashboard() == demo_dashboard()
+
+
+def test_demo_has_enough_mornings_to_draw_activity_cost():
+    rows = demo_dashboard()["activity_cost"]["rows"]
+    assert any(r["enough"] for r in rows)
+    assert {"rest", "football"} <= {r["kind"] for r in rows}
+
+
+def test_demo_has_check_ins_and_no_future_recovery():
+    days = {d["date"]: d for d in demo_dashboard()["days"]}
+    assert days[DEMO_TODAY.isoformat()]["checkin"]["decision"] == "go"
+    assert all(d["recovery"] is None for k, d in days.items() if k > DEMO_TODAY.isoformat())

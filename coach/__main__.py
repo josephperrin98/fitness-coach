@@ -5,6 +5,7 @@
     python -m coach pending
     python -m coach confirm 3 --ack R-REC-3
     python -m coach serve            # the MCP server Claude Desktop starts
+    python -m coach demo-data        # synthetic data for the dashboard's demo mode
 
 confirm exists only here, never in the MCP server: a human types it.
 """
@@ -44,6 +45,9 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("serve", help="run the coach-core MCP server on stdio")
 
+    dd = sub.add_parser("demo-data", help="write synthetic dashboard data (no real data)")
+    dd.add_argument("--out", default="dashboard/demo-data.json")
+
     args = parser.parse_args(argv)
 
     if args.cmd in ("propose", "pending", "confirm"):
@@ -71,6 +75,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.cmd == "serve":
         from .mcp_server import main as serve
         serve()
+        return 0
+
+    if args.cmd == "demo-data":
+        from .demo import write_demo
+        print(f"wrote {write_demo(args.out)}")
         return 0
 
     if args.cmd == "validate":

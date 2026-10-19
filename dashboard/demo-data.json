@@ -1,0 +1,1562 @@
+{
+ "today": "2026-12-09",
+ "goal": {
+  "kind": "half",
+  "race_date": "2027-03-14",
+  "days_to_race": 95
+ },
+ "days": [
+  {
+   "date": "2026-10-19",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 30,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 30,
+      "status": "over",
+      "actual": 31.8,
+      "actual_day": "2026-10-19",
+      "adherence": 97.0,
+      "execution": 97.8,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 31.8,
+     "km": 5.3,
+     "strain": 10.7
+    }
+   ],
+   "checkin": null,
+   "recovery": 86,
+   "hrv": 73.9
+  },
+  {
+   "date": "2026-10-20",
+   "planned": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 8.5
+    }
+   ],
+   "checkin": null,
+   "recovery": 77,
+   "hrv": 74.6
+  },
+  {
+   "date": "2026-10-21",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 30,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 30,
+      "status": "over",
+      "actual": 32.5,
+      "actual_day": "2026-10-21",
+      "adherence": 95.8,
+      "execution": 88.9,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 32.5,
+     "km": 5.42,
+     "strain": 10.7
+    }
+   ],
+   "checkin": null,
+   "recovery": 73,
+   "hrv": 74.9
+  },
+  {
+   "date": "2026-10-22",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 45,
+   "hrv": 64.7
+  },
+  {
+   "date": "2026-10-23",
+   "planned": [
+    {
+     "kind": "football",
+     "target": 90,
+     "unit": "min",
+     "zone_max": null,
+     "note": "",
+     "score": {
+      "planned": 90,
+      "status": "missed",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": 0.0,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": 85,
+   "hrv": 75.3
+  },
+  {
+   "date": "2026-10-24",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 76,
+   "hrv": 73.9
+  },
+  {
+   "date": "2026-10-25",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 8,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 8,
+      "status": "over",
+      "actual": 8.6,
+      "actual_day": "2026-10-25",
+      "adherence": 96.4,
+      "execution": 97.2,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 49.7,
+     "km": 8.58,
+     "strain": 12.1
+    }
+   ],
+   "checkin": null,
+   "recovery": 55,
+   "hrv": 63.0
+  },
+  {
+   "date": "2026-10-26",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 35,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 35,
+      "status": "short",
+      "actual": 25.2,
+      "actual_day": "2026-10-26",
+      "adherence": 72.0,
+      "execution": 93.3,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 25.2,
+     "km": 4.2,
+     "strain": 10.1
+    }
+   ],
+   "checkin": null,
+   "recovery": 60,
+   "hrv": 69.2
+  },
+  {
+   "date": "2026-10-27",
+   "planned": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 6.4
+    }
+   ],
+   "checkin": null,
+   "recovery": 79,
+   "hrv": 76.1
+  },
+  {
+   "date": "2026-10-28",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 35,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 35,
+      "status": "done",
+      "actual": 35.6,
+      "actual_day": "2026-10-28",
+      "adherence": 99.1,
+      "execution": 71.6,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 35.6,
+     "km": 5.93,
+     "strain": 11.0
+    }
+   ],
+   "checkin": null,
+   "recovery": 73,
+   "hrv": 77.1
+  },
+  {
+   "date": "2026-10-29",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 45,
+   "hrv": 61.5
+  },
+  {
+   "date": "2026-10-30",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 61,
+   "hrv": 68.2
+  },
+  {
+   "date": "2026-10-31",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 76,
+   "hrv": 77.5
+  },
+  {
+   "date": "2026-11-01",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 9,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 9,
+      "status": "short",
+      "actual": 7.6,
+      "actual_day": "2026-11-01",
+      "adherence": 84.8,
+      "execution": 74.1,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 44.1,
+     "km": 7.63,
+     "strain": 11.7
+    }
+   ],
+   "checkin": null,
+   "recovery": 82,
+   "hrv": 83.3
+  },
+  {
+   "date": "2026-11-02",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 35,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 35,
+      "status": "short",
+      "actual": 25.2,
+      "actual_day": "2026-11-02",
+      "adherence": 72.0,
+      "execution": 90.9,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 25.2,
+     "km": 4.2,
+     "strain": 10.1
+    }
+   ],
+   "checkin": null,
+   "recovery": 62,
+   "hrv": 70.9
+  },
+  {
+   "date": "2026-11-03",
+   "planned": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 8.0
+    }
+   ],
+   "checkin": null,
+   "recovery": 86,
+   "hrv": 77.7
+  },
+  {
+   "date": "2026-11-04",
+   "planned": [
+    {
+     "kind": "quality",
+     "target": 50,
+     "unit": "min",
+     "zone_max": null,
+     "note": "6 x 3 min at threshold",
+     "score": {
+      "planned": 50,
+      "status": "over",
+      "actual": 55.8,
+      "actual_day": "2026-11-04",
+      "adherence": 94.2,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 55.8,
+     "km": 11.39,
+     "strain": 15.6
+    }
+   ],
+   "checkin": null,
+   "recovery": 86,
+   "hrv": 78.3
+  },
+  {
+   "date": "2026-11-05",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 29,
+   "hrv": 52.0
+  },
+  {
+   "date": "2026-11-06",
+   "planned": [
+    {
+     "kind": "football",
+     "target": 90,
+     "unit": "min",
+     "zone_max": null,
+     "note": "",
+     "score": {
+      "planned": 90,
+      "status": "short",
+      "actual": 65,
+      "actual_day": "2026-11-06",
+      "adherence": 72.2,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "football",
+     "minutes": 65,
+     "km": 0,
+     "strain": 15.3
+    }
+   ],
+   "checkin": null,
+   "recovery": 72,
+   "hrv": 72.9
+  },
+  {
+   "date": "2026-11-07",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 60,
+   "hrv": 62.9
+  },
+  {
+   "date": "2026-11-08",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 10,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 10,
+      "status": "short",
+      "actual": 9.4,
+      "actual_day": "2026-11-08",
+      "adherence": 93.9,
+      "execution": 98.2,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 54.4,
+     "km": 9.39,
+     "strain": 12.5
+    }
+   ],
+   "checkin": null,
+   "recovery": 50,
+   "hrv": 64.2
+  },
+  {
+   "date": "2026-11-09",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 40,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 0,
+      "status": "excused",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": true
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 42.5,
+     "km": 7.08,
+     "strain": 11.5
+    }
+   ],
+   "checkin": {
+    "decision": "rest",
+    "reason": "caution area 4/10: gate says stop",
+    "adjusted_target": null
+   },
+   "recovery": 70,
+   "hrv": 70.7
+  },
+  {
+   "date": "2026-11-10",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 64,
+   "hrv": 67.6
+  },
+  {
+   "date": "2026-11-11",
+   "planned": [
+    {
+     "kind": "quality",
+     "target": 50,
+     "unit": "min",
+     "zone_max": null,
+     "note": "6 x 3 min at threshold",
+     "score": {
+      "planned": 50,
+      "status": "short",
+      "actual": 47.2,
+      "actual_day": "2026-11-11",
+      "adherence": 94.4,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 47.2,
+     "km": 9.63,
+     "strain": 14.9
+    }
+   ],
+   "checkin": null,
+   "recovery": 84,
+   "hrv": 78.6
+  },
+  {
+   "date": "2026-11-12",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 48,
+   "hrv": 62.0
+  },
+  {
+   "date": "2026-11-13",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 46,
+   "hrv": 60.4
+  },
+  {
+   "date": "2026-11-14",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 68,
+   "hrv": 71.7
+  },
+  {
+   "date": "2026-11-15",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 11,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 11,
+      "status": "done",
+      "actual": 11.2,
+      "actual_day": "2026-11-15",
+      "adherence": 99.1,
+      "execution": 92.7,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 68.2,
+     "km": 11.19,
+     "strain": 13.7
+    }
+   ],
+   "checkin": null,
+   "recovery": 61,
+   "hrv": 67.4
+  },
+  {
+   "date": "2026-11-16",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 20,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20,
+      "status": "over",
+      "actual": 21.6,
+      "actual_day": "2026-11-16",
+      "adherence": 96.0,
+      "execution": 91.2,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 21.6,
+     "km": 3.6,
+     "strain": 9.8
+    }
+   ],
+   "checkin": null,
+   "recovery": 61,
+   "hrv": 66.3
+  },
+  {
+   "date": "2026-11-17",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 62,
+   "hrv": 71.7
+  },
+  {
+   "date": "2026-11-18",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 20,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20,
+      "status": "short",
+      "actual": 18.4,
+      "actual_day": "2026-11-18",
+      "adherence": 92.0,
+      "execution": 96.2,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 18.4,
+     "km": 3.07,
+     "strain": 9.5
+    }
+   ],
+   "checkin": null,
+   "recovery": 72,
+   "hrv": 73.7
+  },
+  {
+   "date": "2026-11-19",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 65,
+   "hrv": 74.1
+  },
+  {
+   "date": "2026-11-20",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 51,
+   "hrv": 64.2
+  },
+  {
+   "date": "2026-11-21",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 70,
+   "hrv": 71.8
+  },
+  {
+   "date": "2026-11-22",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 7,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 7,
+      "status": "done",
+      "actual": 7.0,
+      "actual_day": "2026-11-22",
+      "adherence": 99.9,
+      "execution": 98.8,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 42.0,
+     "km": 7.01,
+     "strain": 11.5
+    }
+   ],
+   "checkin": null,
+   "recovery": 62,
+   "hrv": 67.1
+  },
+  {
+   "date": "2026-11-23",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 35,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 35,
+      "status": "done",
+      "actual": 33.6,
+      "actual_day": "2026-11-23",
+      "adherence": 96.0,
+      "execution": 82.7,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 33.6,
+     "km": 5.6,
+     "strain": 10.8
+    }
+   ],
+   "checkin": null,
+   "recovery": 50,
+   "hrv": 63.5
+  },
+  {
+   "date": "2026-11-24",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 61,
+   "hrv": 70.7
+  },
+  {
+   "date": "2026-11-25",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 35,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 35,
+      "status": "done",
+      "actual": 33.5,
+      "actual_day": "2026-11-25",
+      "adherence": 95.7,
+      "execution": 82.1,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 33.5,
+     "km": 5.58,
+     "strain": 10.8
+    }
+   ],
+   "checkin": null,
+   "recovery": 75,
+   "hrv": 71.1
+  },
+  {
+   "date": "2026-11-26",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 74,
+   "hrv": 75.5
+  },
+  {
+   "date": "2026-11-27",
+   "planned": [
+    {
+     "kind": "football",
+     "target": 90,
+     "unit": "min",
+     "zone_max": null,
+     "note": "",
+     "score": {
+      "planned": 90,
+      "status": "over",
+      "actual": 99,
+      "actual_day": "2026-11-27",
+      "adherence": 95.0,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "football",
+     "minutes": 99,
+     "km": 0,
+     "strain": 14.8
+    }
+   ],
+   "checkin": null,
+   "recovery": 90,
+   "hrv": 83.9
+  },
+  {
+   "date": "2026-11-28",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 37,
+   "hrv": 59.9
+  },
+  {
+   "date": "2026-11-29",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 9,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 9,
+      "status": "over",
+      "actual": 9.7,
+      "actual_day": "2026-11-29",
+      "adherence": 96.3,
+      "execution": 98.1,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 58.8,
+     "km": 9.67,
+     "strain": 12.9
+    }
+   ],
+   "checkin": null,
+   "recovery": 74,
+   "hrv": 72.5
+  },
+  {
+   "date": "2026-11-30",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 30,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20.0,
+      "status": "over",
+      "actual": 29.2,
+      "actual_day": "2026-11-30",
+      "adherence": 77.0,
+      "execution": 70.2,
+      "adjusted": true
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 29.2,
+     "km": 4.87,
+     "strain": 10.4
+    }
+   ],
+   "checkin": {
+    "decision": "modify",
+    "reason": "recovery 28%, short sleep",
+    "adjusted_target": 20.0
+   },
+   "recovery": 52,
+   "hrv": 64.1
+  },
+  {
+   "date": "2026-12-01",
+   "planned": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 6.7
+    }
+   ],
+   "checkin": null,
+   "recovery": 66,
+   "hrv": 72.3
+  },
+  {
+   "date": "2026-12-02",
+   "planned": [
+    {
+     "kind": "quality",
+     "target": 50,
+     "unit": "min",
+     "zone_max": null,
+     "note": "6 x 3 min at threshold",
+     "score": {
+      "planned": 50,
+      "status": "done",
+      "actual": 49.3,
+      "actual_day": "2026-12-02",
+      "adherence": 98.6,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 49.3,
+     "km": 10.06,
+     "strain": 15.1
+    }
+   ],
+   "checkin": null,
+   "recovery": 63,
+   "hrv": 68.3
+  },
+  {
+   "date": "2026-12-03",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 20,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20,
+      "status": "over",
+      "actual": 21.3,
+      "actual_day": "2026-12-03",
+      "adherence": 96.8,
+      "execution": 99.5,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 21.3,
+     "km": 3.55,
+     "strain": 9.8
+    }
+   ],
+   "checkin": null,
+   "recovery": 55,
+   "hrv": 67.5
+  },
+  {
+   "date": "2026-12-04",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 51,
+   "hrv": 68.8
+  },
+  {
+   "date": "2026-12-05",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": 62,
+   "hrv": 71.3
+  },
+  {
+   "date": "2026-12-06",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 10,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 10,
+      "status": "done",
+      "actual": 10.2,
+      "actual_day": "2026-12-06",
+      "adherence": 99.2,
+      "execution": 76.9,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 58.9,
+     "km": 10.17,
+     "strain": 12.9
+    }
+   ],
+   "checkin": null,
+   "recovery": 99,
+   "hrv": 82.9
+  },
+  {
+   "date": "2026-12-07",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 30,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 30,
+      "status": "done",
+      "actual": 30.9,
+      "actual_day": "2026-12-07",
+      "adherence": 98.5,
+      "execution": 73.8,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [
+    {
+     "kind": "run",
+     "minutes": 30.9,
+     "km": 5.15,
+     "strain": 10.6
+    }
+   ],
+   "checkin": null,
+   "recovery": 42,
+   "hrv": 60.7
+  },
+  {
+   "date": "2026-12-08",
+   "planned": [],
+   "done": [
+    {
+     "kind": "strength",
+     "minutes": 45,
+     "km": 0,
+     "strain": 7.3
+    }
+   ],
+   "checkin": null,
+   "recovery": 70,
+   "hrv": 69.9
+  },
+  {
+   "date": "2026-12-09",
+   "planned": [
+    {
+     "kind": "quality",
+     "target": 50,
+     "unit": "min",
+     "zone_max": null,
+     "note": "6 x 3 min at threshold",
+     "score": {
+      "planned": 50,
+      "status": "missed",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": 0.0,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": {
+    "decision": "go",
+    "reason": "recovery 71%, caution 0/10",
+    "adjusted_target": null
+   },
+   "recovery": 60,
+   "hrv": 64.8
+  },
+  {
+   "date": "2026-12-10",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 20,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-11",
+   "planned": [
+    {
+     "kind": "football",
+     "target": 90,
+     "unit": "min",
+     "zone_max": null,
+     "note": "",
+     "score": {
+      "planned": 90,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-12",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-13",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 11,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 11,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-14",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 30,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 30,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-15",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-16",
+   "planned": [
+    {
+     "kind": "quality",
+     "target": 50,
+     "unit": "min",
+     "zone_max": null,
+     "note": "6 x 3 min at threshold",
+     "score": {
+      "planned": 50,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-17",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 20,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 20,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-18",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-19",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-20",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 12,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 12,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-21",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 25,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 25,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-22",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-23",
+   "planned": [
+    {
+     "kind": "easy",
+     "target": 25,
+     "unit": "min",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 25,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-24",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-25",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-26",
+   "planned": [],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  },
+  {
+   "date": "2026-12-27",
+   "planned": [
+    {
+     "kind": "long",
+     "target": 8,
+     "unit": "km",
+     "zone_max": 2,
+     "note": "",
+     "score": {
+      "planned": 8,
+      "status": "upcoming",
+      "actual": 0.0,
+      "actual_day": null,
+      "adherence": null,
+      "execution": null,
+      "adjusted": false
+     }
+    }
+   ],
+   "done": [],
+   "checkin": null,
+   "recovery": null,
+   "hrv": null
+  }
+ ],
+ "weeks": [
+  {
+   "start": "2026-10-19",
+   "type": "foundation",
+   "planned_km": 18,
+   "actual_km": 19.3,
+   "adherence": 72.3,
+   "execution": 94.6,
+   "football": 0
+  },
+  {
+   "start": "2026-10-26",
+   "type": "foundation",
+   "planned_km": 20,
+   "actual_km": 17.8,
+   "adherence": 85.3,
+   "execution": 79.7,
+   "football": 0
+  },
+  {
+   "start": "2026-11-02",
+   "type": "foundation",
+   "planned_km": 22,
+   "actual_km": 25.0,
+   "adherence": 83.1,
+   "execution": 94.6,
+   "football": 1
+  },
+  {
+   "start": "2026-11-09",
+   "type": "foundation",
+   "planned_km": 24,
+   "actual_km": 27.9,
+   "adherence": 96.8,
+   "execution": 92.7,
+   "football": 0
+  },
+  {
+   "start": "2026-11-16",
+   "type": "recovery",
+   "planned_km": 14,
+   "actual_km": 13.7,
+   "adherence": 96.0,
+   "execution": 95.4,
+   "football": 0
+  },
+  {
+   "start": "2026-11-23",
+   "type": "foundation",
+   "planned_km": 21,
+   "actual_km": 20.9,
+   "adherence": 95.8,
+   "execution": 87.6,
+   "football": 1
+  },
+  {
+   "start": "2026-11-30",
+   "type": "foundation",
+   "planned_km": 24,
+   "actual_km": 28.6,
+   "adherence": 92.9,
+   "execution": 82.2,
+   "football": 0
+  },
+  {
+   "start": "2026-12-07",
+   "type": "foundation",
+   "planned_km": 26,
+   "actual_km": 5.2,
+   "adherence": 49.2,
+   "execution": 73.8,
+   "football": 0
+  },
+  {
+   "start": "2026-12-14",
+   "type": "foundation",
+   "planned_km": 28,
+   "actual_km": null,
+   "adherence": null,
+   "execution": null,
+   "football": 0
+  },
+  {
+   "start": "2026-12-21",
+   "type": "recovery",
+   "planned_km": 16,
+   "actual_km": null,
+   "adherence": null,
+   "execution": null,
+   "football": 0
+  }
+ ],
+ "activity_cost": {
+  "baseline_hrv": 70.8,
+  "rows": [
+   {
+    "kind": "run: quality",
+    "n": 3,
+    "hrv_change_pct": -14.5,
+    "next_recovery": 44,
+    "enough": false
+   },
+   {
+    "kind": "football",
+    "n": 2,
+    "hrv_change_pct": -13.3,
+    "next_recovery": 48.5,
+    "enough": false
+   },
+   {
+    "kind": "run: long",
+    "n": 7,
+    "hrv_change_pct": -6.1,
+    "next_recovery": 56.7,
+    "enough": true
+   },
+   {
+    "kind": "run: easy",
+    "n": 13,
+    "hrv_change_pct": 0.5,
+    "next_recovery": 65,
+    "enough": true
+   },
+   {
+    "kind": "rest",
+    "n": 22,
+    "hrv_change_pct": 2.0,
+    "next_recovery": 70.8,
+    "enough": true
+   },
+   {
+    "kind": "strength",
+    "n": 5,
+    "hrv_change_pct": 2.7,
+    "next_recovery": 71,
+    "enough": true
+   }
+  ],
+  "min_samples": 5
+ },
+ "demo": true
+}
