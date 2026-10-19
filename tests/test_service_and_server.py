@@ -87,3 +87,13 @@ def test_tools_work_through_the_server_not_just_directly(tmp_path, monkeypatch):
     monkeypatch.setattr(mcp_server, "coach", Coach(str(tmp_path / "server.db")))
     result = asyncio.run(mcp_server.mcp.call_tool("get_today", {"day": "2026-10-19"}))
     assert "Monday" in str(result)
+
+
+def test_reads_are_annotated_read_only_and_writes_are_not():
+    # The Claude app asks before running an unannotated local tool; reads should not need that.
+    from coach import mcp_server
+    hints = {t.name: (t.annotations.read_only_hint if t.annotations else None)
+             for t in asyncio.run(mcp_server.mcp.list_tools())}
+    assert all(hints[n] for n in ("get_today", "check_gate", "score_week", "dashboard_data",
+                                  "list_pending_proposals"))
+    assert not hints["record_check_in"] and not hints["propose_plan_change"]

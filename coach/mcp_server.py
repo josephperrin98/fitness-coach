@@ -14,12 +14,14 @@ import json
 from datetime import date
 
 from mcp.server.mcpserver import MCPServer
+from mcp.types import ToolAnnotations
 
 from .checkins import CheckIn, CheckInError
 from .service import Coach
 
 mcp = MCPServer("coach-core")
 coach = Coach()
+READ = ToolAnnotations(read_only_hint=True)   # lets the Claude app run it without asking each time
 
 
 def _day(value: str) -> date:
@@ -30,13 +32,13 @@ def _json(obj) -> str:
     return json.dumps(obj, default=str)
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ)
 def get_today(day: str = "") -> str:
     """Today's planned sessions, the rest of the week, days to race, any check-in already recorded today, and the caution-gate thresholds. 'day' is YYYY-MM-DD; empty means today."""
     return _json(coach.today(_day(day)))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ)
 def check_gate(caution_score: int, effort: str = "run") -> str:
     """Day-of gate for the user's flagged caution area. caution_score is the user's own 0-10 rating this morning (ask them; never guess it). effort is 'run' or 'maximal' (time trials, all-out tests). Returns go, modify or stop with a reason. Code decides; do not override it."""
     return _json(coach.gate(caution_score, effort))
@@ -54,13 +56,13 @@ def record_check_in(decision: str, reason: str, day: str = "", caution_score: in
         return _json({"refused": str(e)})
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ)
 def score_week(strava_activities: str, whoop_workouts: str = "", day: str = "") -> str:
     """Adherence and execution scores for the week containing 'day' (default today). Pass the JSON returned by the Strava connector's list_activities for that week, and Whoop's get_workouts_range for the same dates (for heart-rate zones). Nothing passed in is stored."""
     return _json(coach.week_score(_day(day), strava_activities, whoop_workouts))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ)
 def dashboard_data(strava_activities: str, whoop_workouts: str, whoop_recovery: str, today: str = "",
                    weeks_back: int = 8, weeks_ahead: int = 2) -> str:
     """Everything the dashboard draws: a day-by-day calendar (planned, done, score, check-in, recovery), weekly scores and km, and how each kind of activity moves the next morning's HRV. Pass Strava list_activities JSON and Whoop get_workouts_range / get_recovery_range JSON covering the same weeks. Nothing passed in is stored."""
@@ -77,7 +79,7 @@ def propose_plan_change(plan_yaml: str, rationale: str) -> str:
         return _json({"refused": f"not a valid plan: {e}"})
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ)
 def list_pending_proposals() -> str:
     """Plan proposals waiting for the user's confirmation."""
     return _json(coach.pending())
