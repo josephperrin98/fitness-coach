@@ -127,10 +127,11 @@ def test_execution_unknown_without_heart_rate():
 
 
 def test_scoring_without_provenance_is_refused(tmp_path):
+    import yaml
     from coach.rules import DEFAULT_RULES_PATH, load_rules
-    text = DEFAULT_RULES_PATH.read_text().replace("source: personal_choice\n      note: >\n      Asymmetric",
-                                                   "note: >\n      Asymmetric")
+    raw = yaml.safe_load(DEFAULT_RULES_PATH.read_text())
+    del raw["scoring"]["provenance"]
     bad = tmp_path / "rules.yaml"
-    bad.write_text(text)
+    bad.write_text(yaml.safe_dump(raw))
     with pytest.raises(ValueError, match="scoring"):
         load_rules(bad)
