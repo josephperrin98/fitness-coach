@@ -1,0 +1,136 @@
+# Training rules for the validator.
+#
+# Every rule carries:
+#   tier        hard  -> a plan that breaks it is rejected outright
+#               soft  -> a plan that breaks it can only be confirmed if the
+#                        user acknowledges the rule by id
+#   status      decided  -> the user has signed off on the numbers
+#               proposed -> a working default, still open for discussion
+#   provenance  where the number came from. One of:
+#               literature | clinical | professional | personal_choice
+#
+# Thresholds live here, not in code, so a rule can be changed (and its
+# provenance questioned) without touching the validator.
+
+version: "0.1"
+
+rules:
+  R-REC-1:
+    summary: Recovery weeks are genuinely lighter
+    tier: hard
+    status: decided
+    params:
+      max_runs: 3
+      max_quality: 0
+      max_long_run_km: 8
+      max_fraction_of_block_peak: 0.60
+      max_football: 0
+      # A week flagged life_event at or below this fraction of the block peak
+      # counts as a recovery week and resets the loading-week counter.
+      life_event_fraction: 0.60
+    provenance:
+      source: personal_choice
+      note: >
+        Deliberately at the conservative end of the usual range. Published
+        plans commonly cut recovery-week volume by 20-40%; 60% of peak is a
+        personal choice based on past experience, not an evidence-based minimum.
+
+  R-REC-2:
+    summary: The week after a recovery week restarts below the last block peak
+    tier: soft
+    status: proposed
+    params:
+      max_fraction_of_last_peak: 0.90
+    provenance:
+      source: professional
+      note: Coaching convention. Exempt from the week-over-week cap (R-LOAD-1).
+
+  R-REC-3:
+    summary: At most N loading weeks in a row before a recovery week
+    tier: soft
+    status: proposed
+    params:
+      max_loading_weeks: 4
+    provenance:
+      source: personal_choice
+      note: A 3+1 or 4+1 rhythm is common in published plans; 4+1 chosen for this user.
+
+  R-FREQ-1:
+    summary: Run frequency ceiling, and where a 5th run is allowed
+    tier: hard
+    status: decided
+    params:
+      hard_ceiling: 5
+      typical_max: 4
+      five_run_week_types: [race_specific]
+    provenance:
+      source: personal_choice
+      note: >
+        3-4 runs is what the user can sustain; a 5th (easy) run is acceptable
+        only in the race-specific window. Observational data associates higher
+        run frequency with faster marathons, but it does not show causation.
+
+  R-FREQ-2:
+    summary: Limit how many 5-run weeks a block can contain
+    tier: soft
+    status: proposed
+    params:
+      max_five_run_weeks_per_block: {half: 3, marathon: 4}
+      max_consecutive_five_run_weeks: 2
+    provenance:
+      source: personal_choice
+      note: Numbers are a working proposal; to be confirmed.
+
+  R-FOOT-1:
+    summary: Football only in lighter week types
+    tier: hard
+    status: decided
+    params:
+      foundation: {max_per_week: 1}
+      build: {max_per_window: 1, window_weeks: 2}
+      race_specific: {max_per_week: 0}
+      recovery: {max_per_week: 0}
+      taper: {max_per_week: 0}
+      race: {max_per_week: 0}
+    provenance:
+      source: personal_choice
+      note: Impact and contact load is kept out of peak, recovery and taper weeks.
+
+  R-INT-1:
+    summary: Limit hard sessions per week
+    tier: hard
+    status: proposed
+    params:
+      max_quality_per_week: 2
+    provenance:
+      source: professional
+      note: Common convention for recreational runners; not derived from a trial.
+
+  R-LOAD-1:
+    summary: Week-over-week volume increase caps
+    tier: hard          # the 30% line is hard; the 20% line is reported as soft
+    status: proposed
+    params:
+      soft_pct: 0.20
+      hard_pct: 0.30
+      small_base_km: 20       # below this, a flat allowance also applies
+      small_base_abs_km: 3
+    provenance:
+      source: literature
+      note: >
+        The "10% rule" is not supported by trials: Buist 2008 (532 novices) and
+        Nielsen 2014 (874 novices) found no significant injury difference for
+        faster progression. The caps here are monitoring thresholds, not
+        proven safe limits.
+
+# Day-of gates. These apply to a flagged "caution area" (a joint with history),
+# which the user names in private config. No health detail lives in this file.
+gates:
+  caution_area:
+    run_go_max: 2        # 0-2: train as planned
+    run_modify_max: 4    # 3-4: modify (shorter, flatter, easier)
+                         # >=5: no running
+    maximal_effort_max: 1  # time trials and all-out tests need a stricter score
+    provenance:
+      source: personal_choice
+      note: Ladder is a proposal pending professional (physio) confirmation.

@@ -1,0 +1,13 @@
+# secrets and private data -- never commit
+.env
+*.local.yaml
+*.local.md
+*.db
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/

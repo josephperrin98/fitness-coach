@@ -1,0 +1,27 @@
+# EXAMPLE PLAN -- synthetic numbers for demonstration only.
+# This is not a real athlete's plan and not coaching advice. A real plan lives
+# in plan.local.yaml, which is gitignored.
+goal: half
+race_date: 2027-03-14
+weeks:
+  - {start: 2026-10-19, type: foundation, runs: 3, km: 18, quality: 0, long_run_km: 8, football: 1}
+  - {start: 2026-10-26, type: foundation, runs: 3, km: 20, quality: 0, long_run_km: 9, football: 0}
+  - {start: 2026-11-02, type: foundation, runs: 3, km: 22, quality: 1, long_run_km: 10, football: 1}
+  - {start: 2026-11-09, type: foundation, runs: 3, km: 24, quality: 1, long_run_km: 11, football: 0}
+  - {start: 2026-11-16, type: recovery, runs: 3, km: 14, quality: 0, long_run_km: 7, football: 0}
+  - {start: 2026-11-23, type: foundation, runs: 3, km: 21, quality: 0, long_run_km: 9, football: 1}
+  - {start: 2026-11-30, type: foundation, runs: 4, km: 24, quality: 1, long_run_km: 10, football: 0}
+  - {start: 2026-12-07, type: foundation, runs: 4, km: 26, quality: 1, long_run_km: 11, football: 1}
+  - {start: 2026-12-14, type: foundation, runs: 4, km: 28, quality: 1, long_run_km: 12, football: 0}
+  - {start: 2026-12-21, type: recovery, runs: 3, km: 16, quality: 0, long_run_km: 8, football: 0}
+  - {start: 2026-12-28, type: build, runs: 4, km: 25, quality: 2, long_run_km: 12, football: 1}
+  - {start: 2027-01-04, type: build, runs: 4, km: 29, quality: 2, long_run_km: 14, football: 0}
+  - {start: 2027-01-11, type: build, runs: 4, km: 33, quality: 2, long_run_km: 16, football: 1}
+  - {start: 2027-01-18, type: build, runs: 4, km: 36, quality: 2, long_run_km: 18, football: 0}
+  - {start: 2027-01-25, type: recovery, runs: 3, km: 21, quality: 0, long_run_km: 8, football: 0}
+  - {start: 2027-02-01, type: race_specific, runs: 4, km: 32, quality: 2, long_run_km: 16, football: 0}
+  - {start: 2027-02-08, type: race_specific, runs: 5, km: 38, quality: 2, long_run_km: 18, football: 0}
+  - {start: 2027-02-15, type: race_specific, runs: 4, km: 42, quality: 2, long_run_km: 20, football: 0}
+  - {start: 2027-02-22, type: race_specific, runs: 5, km: 46, quality: 2, long_run_km: 22, football: 0}
+  - {start: 2027-03-01, type: taper, runs: 3, km: 28, quality: 2, long_run_km: 12, football: 0}
+  - {start: 2027-03-08, type: race, runs: 2, km: 10, quality: 1, long_run_km: 0, football: 0}
