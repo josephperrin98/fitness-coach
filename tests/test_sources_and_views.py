@@ -44,8 +44,19 @@ def test_far_apart_starts_are_not_joined():
 
 
 def test_unknown_sport_is_other():
-    assert actuals_from_strava([{"sport_type": "Kitesurf", "start_local": "2026-10-19T10:00:00",
+    assert actuals_from_strava([{"sport_type": "Curling", "start_local": "2026-10-19T10:00:00",
                                  "summary": {}}])[0].kind == "other"
+
+
+def test_sports_seen_in_real_data_have_a_kind():
+    # Names as the connectors actually send them, so the calendar stops saying "Other".
+    strava = {"Kitesurf": "kite", "Walk": "walk", "Hike": "walk"}
+    whoop = {"walking": "walk", "commuting": "walk", "kiteboarding": "kite", "paddle-tennis": "racket"}
+    for sport, kind in strava.items():
+        row = {"sport_type": sport, "start_local": "2026-10-19T10:00:00", "summary": {}}
+        assert actuals_from_strava([row])[0].kind == kind, sport
+    for sport, kind in whoop.items():
+        assert actuals_from_whoop([{"start": "2026-10-19T10:00", "sport": sport}])[0].kind == kind, sport
 
 
 def test_dashboard_scores_the_week_and_shows_check_in():

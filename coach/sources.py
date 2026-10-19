@@ -18,11 +18,16 @@ STRAVA_KINDS = {
     "Soccer": "football",
     "WeightTraining": "strength", "Workout": "strength", "Crossfit": "strength",
     "Ride": "ride", "VirtualRide": "ride", "GravelRide": "ride", "MountainBikeRide": "ride",
+    "Walk": "walk", "Hike": "walk",
+    "Kitesurf": "kite",
 }
 WHOOP_KINDS = {
     "running": "run", "soccer": "football",
     "weightlifting": "strength", "functional-fitness": "strength", "strength-trainer": "strength",
     "cycling": "ride",
+    "walking": "walk", "commuting": "walk",
+    "kiteboarding": "kite",
+    "paddle-tennis": "racket", "tennis": "racket", "squash": "racket", "padel": "racket",
 }
 MATCH_WINDOW_MIN = 30   # same activity if the two starts are this close
 

@@ -15,7 +15,7 @@ from datetime import date, datetime
 from .plan import Session, Week
 from .rules import RuleSet, load_rules
 
-ACTUAL_KINDS = ("run", "football", "strength", "ride", "other")
+ACTUAL_KINDS = ("run", "football", "strength", "ride", "walk", "kite", "racket", "other")
 
 
 @dataclass(frozen=True)
