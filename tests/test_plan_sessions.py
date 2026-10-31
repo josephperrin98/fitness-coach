@@ -75,3 +75,24 @@ def test_plan_finds_session_by_day():
     assert [x.target for x in plan.sessions_on(date(2026, 10, 21))] == [40]
     assert plan.sessions_on(date(2026, 10, 22)) == ()
     assert plan.week_of(date(2026, 10, 25)).start == MON
+
+
+def test_session_and_plan_carry_pace_intent_round_trip():
+    from coach.plan import plan_from_dict, plan_to_dict
+    data = {"goal": "half", "race_date": "2027-03-14", "target_time": "1:30:00",
+            "weeks": [{"start": "2026-11-02", "type": "foundation", "runs": 1, "km": 8, "quality": 1,
+                       "sessions": [{"day": "2026-11-03", "kind": "quality", "target": 50,
+                                     "pace": "threshold", "structure": "3 x 10 min"}]}]}
+    plan = plan_from_dict(data)
+    s = plan.weeks[0].sessions[0]
+    assert (plan.target_time, s.pace, s.structure) == (5400, "threshold", "3 x 10 min")
+    again = plan_from_dict(plan_to_dict(plan))
+    assert again == plan
+
+
+def test_unknown_pace_kind_is_refused():
+    import pytest
+    from datetime import date
+    from coach.plan import Session
+    with pytest.raises(ValueError, match="pace"):
+        Session(day=date(2026, 11, 3), kind="easy", pace="sprinty")

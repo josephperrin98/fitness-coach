@@ -19,6 +19,7 @@ SESSION_KINDS = ("easy", "quality", "long", "test", "football", "strength")
 RUN_KINDS = ("easy", "quality", "long", "test")
 HARD_KINDS = ("quality", "test")   # count towards Week.quality
 UNITS = ("min", "km")
+PACE_KINDS = ("easy", "long", "threshold", "interval", "race")   # seconds come from VDOT (D29)
 
 
 @dataclass(frozen=True)
@@ -30,12 +31,16 @@ class Session:
     unit: str = "min"      # minutes for most sessions, km for the long run
     zone_max: int | None = None   # heart-rate zone ceiling for easy running
     note: str = ""
+    pace: str | None = None   # one of PACE_KINDS; the band in s/km is computed, never stored
+    structure: str = ""       # e.g. "3 x 10 min"
 
     def __post_init__(self) -> None:
         if self.kind not in SESSION_KINDS:
             raise ValueError(f"unknown session kind {self.kind!r}; expected one of {SESSION_KINDS}")
         if self.unit not in UNITS:
             raise ValueError(f"unknown unit {self.unit!r}; expected one of {UNITS}")
+        if self.pace is not None and self.pace not in PACE_KINDS:
+            raise ValueError(f"unknown pace {self.pace!r}; expected one of {PACE_KINDS}")
         if self.target < 0:
             raise ValueError("target must be non-negative")
 
@@ -89,6 +94,7 @@ class Plan:
     goal: str                  # "half" | "marathon"
     race_date: date
     weeks: tuple[Week, ...]
+    target_time: int | None = None   # race goal in seconds; sets the target VDOT
 
     def __post_init__(self) -> None:
         if self.goal not in GOALS:
@@ -123,13 +129,16 @@ def plan_from_dict(data: dict[str, Any]) -> Plan:
         )
         for w in data["weeks"]
     )
-    return Plan(goal=data["goal"], race_date=_as_date(data["race_date"]), weeks=weeks)
+    target = data.get("target_time")
+    return Plan(goal=data["goal"], race_date=_as_date(data["race_date"]), weeks=weeks,
+                target_time=_as_seconds(target) if target else None)
 
 
 def plan_to_dict(plan: Plan) -> dict[str, Any]:
     return {
         "goal": plan.goal,
         "race_date": plan.race_date.isoformat(),
+        "target_time": _hms(plan.target_time) if plan.target_time else None,
         "weeks": [
             {
                 "start": w.start.isoformat(),
@@ -156,13 +165,25 @@ def _session_from_dict(d: dict[str, Any]) -> Session:
     zone = d.get("zone_max")
     return Session(day=_as_date(d["day"]), kind=d["kind"], target=float(d.get("target", 0)),
                    unit=d.get("unit", "min"), zone_max=int(zone) if zone is not None else None,
-                   note=str(d.get("note", "")))
+                   note=str(d.get("note", "")), pace=d.get("pace"), structure=str(d.get("structure", "")))
 
 
 def _session_to_dict(x: Session) -> dict[str, Any]:
     return {"day": x.day.isoformat(), "kind": x.kind, "target": x.target, "unit": x.unit,
-            "zone_max": x.zone_max, "note": x.note}
+            "zone_max": x.zone_max, "note": x.note, "pace": x.pace, "structure": x.structure}
 
 
 def _as_date(value: Any) -> date:
     return value if isinstance(value, date) else date.fromisoformat(str(value))
+
+
+def _as_seconds(value: Any) -> int:
+    """'1:30:00' or '45:00' to seconds."""
+    seconds = 0
+    for part in str(value).split(":"):
+        seconds = seconds * 60 + int(part)
+    return seconds
+
+
+def _hms(seconds: int) -> str:
+    return f"{seconds // 3600}:{seconds % 3600 // 60:02d}:{seconds % 60:02d}"
