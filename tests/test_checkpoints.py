@@ -20,3 +20,9 @@ def test_refuses_unknown_kinds_and_impossible_results():
         Checkpoint(day=date(2026, 10, 22), kind="vibes", distance_m=5000, seconds=1200)
     with pytest.raises(ValueError, match="positive"):
         Checkpoint(day=date(2026, 10, 22), kind="5k", distance_m=5000, seconds=0)
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf")])
+def test_refuses_non_finite_results(bad):
+    with pytest.raises(ValueError, match="positive"):
+        Checkpoint(day=date(2026, 10, 22), kind="5k", distance_m=5000, seconds=bad)

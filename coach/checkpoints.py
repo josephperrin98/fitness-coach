@@ -7,6 +7,7 @@ never stored, so a change to the formula can never leave stale numbers behind.
 """
 from __future__ import annotations
 
+import math
 import sqlite3
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
@@ -37,8 +38,9 @@ class Checkpoint:
     def __post_init__(self) -> None:
         if self.kind not in CHECKPOINT_KINDS:
             raise ValueError(f"unknown checkpoint kind {self.kind!r}; expected one of {CHECKPOINT_KINDS}")
-        if self.distance_m <= 0 or self.seconds <= 0:
-            raise ValueError("distance and time must be positive")
+        if not (math.isfinite(self.distance_m) and math.isfinite(self.seconds)
+                and self.distance_m > 0 and self.seconds > 0):
+            raise ValueError("distance and time must be positive finite numbers")
 
     @property
     def vdot(self) -> float:
