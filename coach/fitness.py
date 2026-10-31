@@ -8,6 +8,10 @@ library only: the model is two published equations.
 from __future__ import annotations
 
 import math
+from collections.abc import Sequence
+from datetime import date, timedelta
+
+from .plan import LOADING_TYPES, Week
 
 RACE_METRES = {"half": 21097.5, "marathon": 42195.0}
 
@@ -54,3 +58,28 @@ def pace_band(vdot_value: float, kind: str, intensity: dict, race_m: float | Non
 def fmt_pace(sec_per_km: float) -> str:
     s = round(sec_per_km)
     return f"{s // 60}:{s % 60:02d}"
+
+
+def vdot_line(weeks: Sequence[Week], start_day: date, start_vdot: float,
+              target_day: date, target_vdot: float) -> dict[date, float]:
+    """Planned VDOT for each week from the checkpoint's week on (D30).
+
+    It rises in equal steps in loading weeks up to the target's week and holds in
+    recovery, taper and race weeks, so recovery is never asked to make you fitter.
+    """
+    first = start_day - timedelta(days=start_day.weekday())
+    last = target_day - timedelta(days=target_day.weekday())
+    ahead = [w for w in weeks if w.start >= first]
+    rising = [w for w in ahead if first < w.start <= last and w.type in LOADING_TYPES]
+    step = (target_vdot - start_vdot) / len(rising) if rising and target_vdot > start_vdot else 0.0
+    line, value = {}, start_vdot
+    for w in ahead:
+        if w in rising:
+            value += step
+        line[w.start] = round(value, 2)
+    return line
+
+
+def pace_vdot(line_vdot: float, checkpoint_vdot: float, cap: float) -> float:
+    """The VDOT paces are computed from: the planned line, never more than cap above the last test."""
+    return min(line_vdot, checkpoint_vdot + cap)

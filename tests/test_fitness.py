@@ -54,3 +54,36 @@ def test_race_pace_needs_a_race_distance():
 def test_fmt_pace():
     assert fmt_pace(260) == "4:20"
     assert fmt_pace(299.6) == "5:00"
+
+
+from datetime import date
+
+from coach.fitness import pace_vdot, vdot_line
+from coach.plan import Week
+
+
+def _weeks(*types):
+    return tuple(Week(start=date(2026, 11, 2 + 7 * i), type=t, runs=3, km=20) for i, t in enumerate(types))
+
+
+def test_line_rises_in_loading_weeks_and_holds_in_recovery():
+    weeks = _weeks("foundation", "foundation", "recovery", "build", "taper")
+    line = vdot_line(weeks, date(2026, 11, 3), 48.0, date(2026, 11, 23), 50.0)
+    assert [line[w.start] for w in weeks] == [48.0, 49.0, 49.0, 50.0, 50.0]
+
+
+def test_line_is_flat_when_already_at_target():
+    weeks = _weeks("foundation", "build")
+    line = vdot_line(weeks, date(2026, 11, 2), 51.0, date(2026, 11, 9), 50.0)
+    assert list(line.values()) == [51.0, 51.0]
+
+
+def test_line_ignores_weeks_before_the_checkpoint():
+    weeks = _weeks("foundation", "foundation", "build")
+    line = vdot_line(weeks, date(2026, 11, 10), 48.0, date(2026, 11, 16), 49.0)
+    assert date(2026, 11, 2) not in line and line[date(2026, 11, 16)] == 49.0
+
+
+def test_paces_never_assume_more_than_the_cap_above_the_last_test():
+    assert pace_vdot(52.0, 48.0, 1.0) == 49.0
+    assert pace_vdot(48.5, 48.0, 1.0) == 48.5
