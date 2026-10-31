@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from datetime import date, timedelta
 from statistics import mean, median
-from typing import Any
+from typing import Any, Callable
 
 from .checkins import CheckInStore
 from .plan import Plan
@@ -76,6 +76,20 @@ def dashboard(plan: Plan | None, checkins: CheckInStore, actuals: list[Actual],
     }
 
 
+def add_pace_bands(out: dict[str, Any], bands_for: Callable[[date], dict[str, str]]) -> dict[str, Any]:
+    """Give each planned session with a pace intent its band in m:ss/km, or None without one.
+    bands_for is called once per week: the band only changes when the planned VDOT line steps up."""
+    weekly: dict[date, dict[str, str]] = {}
+    for d in out["days"]:
+        day = date.fromisoformat(d["date"])
+        monday = day - timedelta(days=day.weekday())
+        if monday not in weekly:
+            weekly[monday] = bands_for(day)
+        for s in d["planned"]:
+            s["pace_band"] = weekly[monday].get(s["pace"]) if s["pace"] else None
+    return out
+
+
 def activity_cost(actuals: list[Actual], recoveries: list[dict], plan: Plan | None = None) -> dict[str, Any]:
     """For each kind of day, the next morning's HRV against the personal median, and recovery.
 
@@ -126,7 +140,8 @@ def _label(d: date, acts: list[Actual], plan: Plan | None) -> str:
 
 
 def _session(x, score) -> dict[str, Any]:
-    out = {"kind": x.kind, "target": x.target, "unit": x.unit, "zone_max": x.zone_max, "note": x.note}
+    out = {"kind": x.kind, "target": x.target, "unit": x.unit, "zone_max": x.zone_max, "note": x.note,
+           "pace": x.pace, "structure": x.structure}
     if score:
         s = asdict(score)
         out["score"] = {k: (v.isoformat() if isinstance(v, date) else v) for k, v in s.items()

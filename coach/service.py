@@ -17,14 +17,14 @@ import yaml
 
 from .checkins import CheckIn, CheckInStore
 from .checkpoints import Checkpoint, CheckpointStore
-from .fitness import RACE_METRES, fmt_pace, pace_band, pace_vdot, vdot, vdot_line
+from .fitness import RACE_METRES, pace_bands, pace_vdot, vdot, vdot_line
 from .gates import check_caution_gate
 from .plan import Plan, plan_from_dict
 from .rules import RuleSet, load_rules
 from .score import score_week
 from .sources import actuals_from_strava, actuals_from_whoop, merge
 from .store import PlanStore
-from .views import dashboard
+from .views import add_pace_bands, dashboard
 
 DEFAULT_DB = Path(__file__).resolve().parent.parent / "data" / "coach.db"
 
@@ -79,16 +79,13 @@ class Coach:
             line = vdot_line(plan.weeks, cp.day, cp.vdot, target_day,
                              vdot(race_m, plan.target_time)).get(monday, cp.vdot)
         used = pace_vdot(line, cp.vdot, prog["cap_above_checkpoint"])
-        kinds = ["easy", "long", "threshold", "interval"] + (["race"] if race_m else [])
-        intensity = self.rules.paces["intensity"]
-        bands = {k: pace_band(used, k, intensity, race_m) for k in kinds}
         return {
             "day": day.isoformat(),
             "checkpoint": {"day": cp.day.isoformat(), "kind": cp.kind, "vdot": round(cp.vdot, 1)},
             "line_vdot": round(line, 1),
             "vdot_used": round(used, 1),
             "capped": used < line,
-            "paces": {k: f"{fmt_pace(fast)}-{fmt_pace(slow)}/km" for k, (fast, slow) in bands.items()},
+            "paces": pace_bands(used, self.rules.paces["intensity"], race_m),
         }
 
     def gate(self, score: int, effort: str = "run") -> dict[str, str]:
@@ -106,8 +103,10 @@ class Coach:
     def dashboard(self, today: date, strava: Any, whoop_workouts: Any, whoop_recovery: Any,
                   weeks_back: int = 8, weeks_ahead: int = 2) -> dict[str, Any]:
         acts = merge(actuals_from_strava(_rows(strava, "activities")), actuals_from_whoop(_rows(whoop_workouts)))
-        return dashboard(self.plan(), self.checkins, acts, _rows(whoop_recovery), today,
-                         weeks_back, weeks_ahead, self.rules)
+        out = dashboard(self.plan(), self.checkins, acts, _rows(whoop_recovery), today,
+                        weeks_back, weeks_ahead, self.rules)
+        # Bands depend on checkpoints, which views.dashboard does not see.
+        return add_pace_bands(out, lambda day: self.paces(day).get("paces", {}))
 
     # -- writes the agent may make ------------------------------------------------
     def record_check_in(self, c: CheckIn) -> dict[str, Any]:

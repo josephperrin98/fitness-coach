@@ -15,9 +15,11 @@ from pathlib import Path
 from typing import Any
 
 from .checkins import CheckIn, CheckInStore
+from .fitness import RACE_METRES, pace_bands, vdot
 from .plan import Plan, Session, Week
 from .score import Actual
-from .views import dashboard
+from .rules import load_rules
+from .views import add_pace_bands, dashboard
 
 DEMO_TODAY = date(2026, 12, 9)      # a Wednesday, so the current week is half done
 FIRST_MONDAY = date(2026, 10, 19)
@@ -31,6 +33,7 @@ WEEKS = [
     ("foundation", 4, 24, 1, 10, 0), ("foundation", 4, 26, 1, 11, 1),
     ("foundation", 4, 28, 1, 12, 0), ("recovery", 3, 16, 0, 8, 0),
 ]
+DEMO_VDOT = vdot(5000, 20 * 60)     # a textbook 20:00 5 km, held flat: the demo has no target time
 EASY_PACE = 6.0                     # min/km, to turn easy kilometres into minutes
 CHECKINS = [
     CheckIn(date(2026, 11, 9), "rest", "caution area 4/10: gate says stop", caution_score=4, feel=5),
@@ -45,7 +48,8 @@ def demo_plan() -> Plan:
         mon = FIRST_MONDAY + timedelta(weeks=i)
         easy_min = round((km - long_km) / (runs - 1) * EASY_PACE / 5) * 5
         sessions = [Session(mon, "easy", easy_min, zone_max=2)]
-        sessions.append(Session(mon + timedelta(days=2), "quality", 50, note="6 x 3 min at threshold")
+        sessions.append(Session(mon + timedelta(days=2), "quality", 50,
+                                pace="threshold", structure="6 x 3 min")
                         if quality else Session(mon + timedelta(days=2), "easy", easy_min, zone_max=2))
         if runs == 4:
             sessions.append(Session(mon + timedelta(days=3), "easy", easy_min - 10, zone_max=2))
@@ -128,6 +132,8 @@ def demo_dashboard(today: date = DEMO_TODAY) -> dict[str, Any]:
     actuals = demo_actuals(plan, today)
     recoveries = demo_recoveries(actuals, FIRST_MONDAY, today)
     out = dashboard(plan, demo_checkins(plan), actuals, recoveries, today, weeks_back=8, weeks_ahead=2)
+    bands = pace_bands(DEMO_VDOT, load_rules().paces["intensity"], RACE_METRES[plan.goal])
+    add_pace_bands(out, lambda _day: bands)
     out["demo"] = True
     return out
 

@@ -184,6 +184,8 @@ const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); r
 const fmt = (s, opts) => parse(s).toLocaleDateString("en-GB", opts);
 // No target (gym, football) means "turn up": show nothing rather than "0′".
 const target = (t, unit) => !+t ? "" : unit === "km" ? `${+t} km` : `${+t}′`;
+// Intent always shows; the band in m:ss/km only once a confirmed checkpoint exists.
+const paceText = (s) => !s.pace ? "" : ` · ${s.structure ? `${esc(s.structure)} ` : ""}${s.pace}${s.pace_band ? ` ${s.pace_band}` : ""}`;
 const recBand = (r) => r == null ? "" : r >= 67 ? "hi" : r >= 34 ? "mid" : "lo";   // Whoop's own colour bands
 
 let data = null, selected = null, liveShown = false;
@@ -200,7 +202,7 @@ function render(d) {
 
 function renderToday(d) {
   const t = d.days.find((x) => x.date === d.today);
-  const plan = t && t.planned.length ? t.planned.map((s) => `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${s.zone_max ? ` · Z${s.zone_max} max` : ""}`).join(" + ") : "Rest day";
+  const plan = t && t.planned.length ? t.planned.map((s) => `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${paceText(s)}${s.zone_max ? ` · Z${s.zone_max} max` : ""}`).join(" + ") : "Rest day";
   const note = t && t.planned.map((s) => s.note).filter(Boolean).join(" · ");
   const ck = t && t.checkin;
   const ckText = ck ? `${ck.decision.toUpperCase()}${ck.adjusted_target ? ` → ${target(ck.adjusted_target, t.planned[0]?.unit)}` : ""}` : "Not yet";
@@ -276,7 +278,7 @@ function showDay(date) {
   const rows = [];
   day.planned.forEach((s) => {
     const sc = s.score;
-    let v = `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${s.zone_max ? ` (zone ${s.zone_max} max)` : ""}`;
+    let v = `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${paceText(s)}${s.zone_max ? ` (zone ${s.zone_max} max)` : ""}`;
     if (sc && sc.status !== "upcoming") {
       v += ` — ${sc.status}`;
       if (sc.actual != null && sc.status !== "missed" && sc.status !== "excused") v += `: ${target(sc.actual, sc.unit)}${sc.adjusted ? ` against ${target(sc.planned, sc.unit)} agreed` : ""}`;

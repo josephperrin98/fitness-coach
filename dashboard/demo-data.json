@@ -15,6 +15,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 30,
       "status": "done",
@@ -23,7 +25,8 @@
       "adherence": 99.0,
       "execution": 84.6,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -62,6 +65,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 30,
       "status": "short",
@@ -70,7 +75,8 @@
       "adherence": 91.7,
       "execution": 70.2,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -102,6 +108,8 @@
      "unit": "min",
      "zone_max": null,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 90,
       "status": "done",
@@ -110,7 +118,8 @@
       "adherence": 98.3,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -142,6 +151,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 8,
       "status": "done",
@@ -150,7 +161,8 @@
       "adherence": 97.8,
       "execution": 96.7,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -174,6 +186,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 35,
       "status": "done",
@@ -182,7 +196,8 @@
       "adherence": 99.6,
       "execution": 94.1,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -214,6 +229,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 35,
       "status": "done",
@@ -222,7 +239,8 @@
       "adherence": 98.7,
       "execution": 88.3,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -270,6 +288,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 9,
       "status": "done",
@@ -278,7 +298,8 @@
       "adherence": 98.8,
       "execution": 78.1,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -302,6 +323,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 35,
       "status": "short",
@@ -310,7 +333,8 @@
       "adherence": 93.1,
       "execution": 80.4,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -348,7 +372,9 @@
      "target": 50,
      "unit": "min",
      "zone_max": null,
-     "note": "6 x 3 min at threshold",
+     "note": "",
+     "pace": "threshold",
+     "structure": "6 x 3 min",
      "score": {
       "planned": 50,
       "status": "over",
@@ -357,7 +383,8 @@
       "adherence": 94.3,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": "4:11-4:21/km"
     }
    ],
    "done": [
@@ -389,6 +416,8 @@
      "unit": "min",
      "zone_max": null,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 90,
       "status": "short",
@@ -397,7 +426,8 @@
       "adherence": 93.3,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -429,6 +459,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 10,
       "status": "short",
@@ -437,7 +469,8 @@
       "adherence": 89.1,
       "execution": 88.3,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -461,6 +494,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 0,
       "status": "excused",
@@ -469,7 +504,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": true
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -504,7 +540,9 @@
      "target": 50,
      "unit": "min",
      "zone_max": null,
-     "note": "6 x 3 min at threshold",
+     "note": "",
+     "pace": "threshold",
+     "structure": "6 x 3 min",
      "score": {
       "planned": 50,
       "status": "moved",
@@ -513,7 +551,8 @@
       "adherence": 62.0,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": "4:11-4:21/km"
     }
    ],
    "done": [],
@@ -561,6 +600,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 11,
       "status": "done",
@@ -569,7 +610,8 @@
       "adherence": 96.8,
       "execution": 86.3,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -593,6 +635,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20,
       "status": "short",
@@ -601,7 +645,8 @@
       "adherence": 93.5,
       "execution": 73.3,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -640,6 +685,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20,
       "status": "done",
@@ -648,7 +695,8 @@
       "adherence": 100.0,
       "execution": 73.5,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -696,6 +744,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 7,
       "status": "over",
@@ -704,7 +754,8 @@
       "adherence": 96.6,
       "execution": 78.8,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -728,6 +779,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 35,
       "status": "done",
@@ -736,7 +789,8 @@
       "adherence": 99.4,
       "execution": 87.9,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -775,6 +829,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 35,
       "status": "short",
@@ -783,7 +839,8 @@
       "adherence": 94.3,
       "execution": 79.7,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -815,6 +872,8 @@
      "unit": "min",
      "zone_max": null,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 90,
       "status": "missed",
@@ -823,7 +882,8 @@
       "adherence": 0.0,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -848,6 +908,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 9,
       "status": "done",
@@ -856,7 +918,8 @@
       "adherence": 99.3,
       "execution": 77.5,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -880,6 +943,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20.0,
       "status": "done",
@@ -888,7 +953,8 @@
       "adherence": 100.0,
       "execution": 85.0,
       "adjusted": true
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -930,7 +996,9 @@
      "target": 50,
      "unit": "min",
      "zone_max": null,
-     "note": "6 x 3 min at threshold",
+     "note": "",
+     "pace": "threshold",
+     "structure": "6 x 3 min",
      "score": {
       "planned": 50,
       "status": "over",
@@ -939,7 +1007,8 @@
       "adherence": 96.3,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": "4:11-4:21/km"
     }
    ],
    "done": [
@@ -963,6 +1032,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20,
       "status": "done",
@@ -971,7 +1042,8 @@
       "adherence": 99.5,
       "execution": 97.5,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -1011,6 +1083,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 10,
       "status": "short",
@@ -1019,7 +1093,8 @@
       "adherence": 72.0,
       "execution": 85.9,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -1043,6 +1118,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 30,
       "status": "done",
@@ -1051,7 +1128,8 @@
       "adherence": 99.0,
       "execution": 80.5,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [
@@ -1082,7 +1160,9 @@
      "target": 50,
      "unit": "min",
      "zone_max": null,
-     "note": "6 x 3 min at threshold",
+     "note": "",
+     "pace": "threshold",
+     "structure": "6 x 3 min",
      "score": {
       "planned": 50,
       "status": "upcoming",
@@ -1091,7 +1171,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": "4:11-4:21/km"
     }
    ],
    "done": [],
@@ -1112,6 +1193,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20,
       "status": "upcoming",
@@ -1120,7 +1203,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1137,6 +1221,8 @@
      "unit": "min",
      "zone_max": null,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 90,
       "status": "upcoming",
@@ -1145,7 +1231,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1170,6 +1257,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 11,
       "status": "upcoming",
@@ -1178,7 +1267,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1195,6 +1285,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 30,
       "status": "upcoming",
@@ -1203,7 +1295,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1227,7 +1320,9 @@
      "target": 50,
      "unit": "min",
      "zone_max": null,
-     "note": "6 x 3 min at threshold",
+     "note": "",
+     "pace": "threshold",
+     "structure": "6 x 3 min",
      "score": {
       "planned": 50,
       "status": "upcoming",
@@ -1236,7 +1331,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": "4:11-4:21/km"
     }
    ],
    "done": [],
@@ -1253,6 +1349,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 20,
       "status": "upcoming",
@@ -1261,7 +1359,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1294,6 +1393,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 12,
       "status": "upcoming",
@@ -1302,7 +1403,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1319,6 +1421,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 25,
       "status": "upcoming",
@@ -1327,7 +1431,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1352,6 +1457,8 @@
      "unit": "min",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 25,
       "status": "upcoming",
@@ -1360,7 +1467,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],
@@ -1401,6 +1509,8 @@
      "unit": "km",
      "zone_max": 2,
      "note": "",
+     "pace": null,
+     "structure": "",
      "score": {
       "planned": 8,
       "status": "upcoming",
@@ -1409,7 +1519,8 @@
       "adherence": null,
       "execution": null,
       "adjusted": false
-     }
+     },
+     "pace_band": null
     }
    ],
    "done": [],

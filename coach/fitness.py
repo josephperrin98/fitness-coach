@@ -60,6 +60,12 @@ def fmt_pace(sec_per_km: float) -> str:
     return f"{s // 60}:{s % 60:02d}"
 
 
+def pace_bands(vdot_value: float, intensity: dict, race_m: float | None = None) -> dict[str, str]:
+    """Every band as "m:ss-m:ss/km", fast end first; race pace only when there is a race."""
+    kinds = ["easy", "long", "threshold", "interval"] + (["race"] if race_m else [])
+    return {k: "{}-{}/km".format(*map(fmt_pace, pace_band(vdot_value, k, intensity, race_m))) for k in kinds}
+
+
 def vdot_line(weeks: Sequence[Week], start_day: date, start_vdot: float,
               target_day: date, target_vdot: float) -> dict[date, float]:
     """Planned VDOT for each week from the checkpoint's week on (D30).

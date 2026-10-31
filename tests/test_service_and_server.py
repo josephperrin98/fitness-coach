@@ -183,3 +183,15 @@ def test_record_checkpoint_tool_refuses_bad_input(tmp_path, monkeypatch):
     assert "refused" in out
     ok = json.loads(mcp_server.record_checkpoint("2026-10-22", "5k", 5000, 1200))
     assert ok["saved"]["vdot"] == 49.8
+
+
+def test_dashboard_shows_each_session_pace_band(tmp_path):
+    c = Coach(str(tmp_path / "paced.db"))
+    c.confirm(c.propose(PACED, "seed", author="user")["version"], set())
+    tuesday = lambda d: next(x for x in d["days"] if x["date"] == "2026-10-20")["planned"][0]
+    before = tuesday(c.dashboard(MON, "[]", "[]", "[]"))
+    assert before["pace"] == "threshold" and before["structure"] == "3 x 10 min"
+    assert before["pace_band"] is None
+    c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
+    after = tuesday(c.dashboard(MON, "[]", "[]", "[]"))
+    assert after["pace_band"] == c.paces(date(2026, 10, 20))["paces"]["threshold"]

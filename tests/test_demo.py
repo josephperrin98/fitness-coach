@@ -29,3 +29,8 @@ def test_demo_follows_its_own_check_ins():
     days = {d["date"]: d for d in demo_dashboard()["days"]}
     assert days["2026-11-09"]["done"] == []                                  # rested
     assert days["2026-11-30"]["planned"][0]["score"]["status"] == "done"     # ran the smaller target
+
+
+def test_demo_quality_sessions_carry_a_pace_band():
+    quality = [s for d in demo_dashboard()["days"] for s in d["planned"] if s["kind"] == "quality"]
+    assert quality and all(s["pace"] == "threshold" and s["pace_band"].endswith("/km") for s in quality)
