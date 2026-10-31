@@ -16,6 +16,8 @@ from typing import Any
 import yaml
 
 from .checkins import CheckIn, CheckInStore
+from .checkpoints import Checkpoint, CheckpointStore
+from .fitness import RACE_METRES, fmt_pace, pace_band, pace_vdot, vdot, vdot_line
 from .gates import check_caution_gate
 from .plan import Plan, plan_from_dict
 from .rules import RuleSet, load_rules
@@ -39,6 +41,7 @@ class Coach:
         self.rules = rules or load_rules()
         self.plans = PlanStore(path, self.rules)
         self.checkins = CheckInStore(path)
+        self.checkpoints = CheckpointStore(path)
 
     # -- reads ------------------------------------------------------------------
     def plan(self) -> Plan | None:
@@ -59,6 +62,33 @@ class Coach:
             "days_to_race": (plan.race_date - day).days if plan else None,
             "checkin_today": asdict(latest) if latest else None,
             "gate": {k: v for k, v in self.rules.gates["caution_area"].items() if k != "provenance"},
+            "paces": self.paces(day),
+        }
+
+    def paces(self, day: date) -> dict[str, Any]:
+        """Pace bands for the week of `day` (D29, D30)."""
+        cp = self.checkpoints.latest(day)
+        if cp is None:
+            return {"error": "no checkpoint recorded yet: record a confirmed test result first"}
+        plan, prog = self.plan(), self.rules.paces["progression"]
+        race_m = RACE_METRES[plan.goal] if plan else None
+        line = cp.vdot
+        if plan and plan.target_time:
+            target_day = plan.race_date - timedelta(days=prog["target_lead_days"])
+            monday = day - timedelta(days=day.weekday())
+            line = vdot_line(plan.weeks, cp.day, cp.vdot, target_day,
+                             vdot(race_m, plan.target_time)).get(monday, cp.vdot)
+        used = pace_vdot(line, cp.vdot, prog["cap_above_checkpoint"])
+        kinds = ["easy", "long", "threshold", "interval"] + (["race"] if race_m else [])
+        intensity = self.rules.paces["intensity"]
+        bands = {k: pace_band(used, k, intensity, race_m) for k in kinds}
+        return {
+            "day": day.isoformat(),
+            "checkpoint": {"day": cp.day.isoformat(), "kind": cp.kind, "vdot": round(cp.vdot, 1)},
+            "line_vdot": round(line, 1),
+            "vdot_used": round(used, 1),
+            "capped": used < line,
+            "paces": {k: f"{fmt_pace(fast)}-{fmt_pace(slow)}/km" for k, (fast, slow) in bands.items()},
         }
 
     def gate(self, score: int, effort: str = "run") -> dict[str, str]:
@@ -83,6 +113,11 @@ class Coach:
     def record_check_in(self, c: CheckIn) -> dict[str, Any]:
         return asdict(self.checkins.record(c, self.plan()))
 
+    def record_checkpoint(self, c: Checkpoint) -> dict[str, Any]:
+        """Only after the athlete confirmed the numbers in chat (D31)."""
+        self.checkpoints.record(c)
+        return {"day": c.day.isoformat(), "kind": c.kind, "vdot": round(c.vdot, 1)}
+
     def propose(self, plan_data: dict[str, Any] | str, rationale: str, author: str = "agent") -> dict[str, Any]:
         data = yaml.safe_load(plan_data) if isinstance(plan_data, str) else plan_data
         p = self.plans.propose(plan_from_dict(data), author=author, rationale=rationale)
@@ -106,7 +141,7 @@ def week_bounds(day: date) -> tuple[date, date]:
 
 def _session(s) -> dict[str, Any]:
     return {"day": s.day.isoformat(), "kind": s.kind, "target": s.target, "unit": s.unit,
-            "zone_max": s.zone_max, "note": s.note}
+            "zone_max": s.zone_max, "note": s.note, "pace": s.pace, "structure": s.structure}
 
 
 def _rows(value: Any, key: str | None = None) -> list[dict]:

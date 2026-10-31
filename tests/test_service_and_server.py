@@ -6,6 +6,7 @@ from datetime import date
 import pytest
 
 from coach.checkins import CheckIn
+from coach.checkpoints import Checkpoint
 from coach.service import Coach
 
 PLAN = {
@@ -119,3 +120,36 @@ def test_dashboard_data_accepts_what_the_page_sends(tmp_path, monkeypatch):
     assert monday["planned"][0]["score"]["status"] == "done"
     assert monday["planned"][0]["score"]["execution"] == pytest.approx(90.9, abs=0.1)
     assert d["days"][1]["recovery"] == 70
+
+
+PACED = {
+    "goal": "half", "race_date": "2027-03-14", "target_time": "1:30:00",
+    "weeks": [{"start": "2026-10-19", "type": "foundation", "runs": 1, "km": 8, "quality": 1,
+               "sessions": [{"day": "2026-10-20", "kind": "quality", "target": 50,
+                             "pace": "threshold", "structure": "3 x 10 min"}]}],
+}
+
+
+def test_paces_need_a_checkpoint(coach):
+    assert "error" in coach.paces(MON)
+
+
+def test_paces_follow_the_last_checkpoint_and_respect_the_cap(tmp_path):
+    c = Coach(str(tmp_path / "paced.db"))
+    c.confirm(c.propose(PACED, "seed", author="user")["version"], set())
+    c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
+    p = c.paces(MON)
+    assert p["checkpoint"]["vdot"] == 49.8
+    assert p["line_vdot"] == 49.8 and p["vdot_used"] == 49.8 and p["capped"] is False
+    assert set(p["paces"]) == {"easy", "long", "threshold", "interval", "race"}
+    assert p["paces"]["threshold"].endswith("/km")
+
+
+def test_today_shows_pace_intent_and_bands(tmp_path):
+    c = Coach(str(tmp_path / "paced.db"))
+    c.confirm(c.propose(PACED, "seed", author="user")["version"], set())
+    c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
+    t = c.today(date(2026, 10, 20))
+    assert t["sessions_today"][0]["pace"] == "threshold"
+    assert t["sessions_today"][0]["structure"] == "3 x 10 min"
+    assert "threshold" in t["paces"]["paces"]
