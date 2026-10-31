@@ -28,6 +28,7 @@ class RuleSet:
     rules: dict[str, Rule]
     gates: dict[str, Any] = field(default_factory=dict)
     scoring: dict[str, Any] = field(default_factory=dict)
+    paces: dict[str, Any] = field(default_factory=dict)
 
     def __getitem__(self, rule_id: str) -> Rule:
         return self.rules[rule_id]
@@ -58,4 +59,9 @@ def load_rules(path: str | Path = DEFAULT_RULES_PATH) -> RuleSet:
     scoring = raw.get("scoring", {})
     if scoring and (scoring.get("provenance") or {}).get("source") not in SOURCES:
         raise ValueError(f"scoring: provenance.source must be one of {SOURCES}")
-    return RuleSet(version=str(raw["version"]), rules=rules, gates=raw.get("gates", {}), scoring=scoring)
+    paces = raw.get("paces", {})
+    for part in ("intensity", "progression"):
+        if paces and (paces.get(part, {}).get("provenance") or {}).get("source") not in SOURCES:
+            raise ValueError(f"paces.{part}: provenance.source must be one of {SOURCES}")
+    return RuleSet(version=str(raw["version"]), rules=rules, gates=raw.get("gates", {}),
+                   scoring=scoring, paces=paces)

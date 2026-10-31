@@ -151,3 +151,24 @@ scoring:
       views already watch. Rates are the owner's choice, not from a study.
       The done band only changes the label: watch and GPS data never match a
       target exactly, so an exact-match rule would never show a session as done.
+
+# Paces (D29, D30). intensity: fractions of VDOT that set each pace band.
+# progression: how fast planned paces may move ahead of measured fitness.
+paces:
+  intensity:
+    easy: [0.62, 0.70]
+    long: [0.62, 0.70]
+    threshold: [0.86, 0.90]
+    interval: [0.95, 1.00]
+    provenance:
+      source: literature
+      note: >
+        Daniels and Gilbert's VDOT model (Daniels' Running Formula). The bands
+        sit inside Daniels' published ranges for easy, threshold and interval
+        running. Race pace is not a fraction: it is the race time the VDOT predicts.
+  progression:
+    cap_above_checkpoint: 1.0   # paces never assume more than 1 VDOT point above the last test
+    target_lead_days: 14        # reach the target VDOT two weeks before the race
+    provenance:
+      source: personal_choice
+      note: The plan may aim high; evidence limits how far it runs ahead. Owner's choice.
