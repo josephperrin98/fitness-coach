@@ -86,13 +86,21 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .day.future { background: transparent; }
 .dn { font-family: var(--display); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; }
 .ck { font-size: 10px; font-weight: 600; padding: 0 4px; border-radius: 3px; background: var(--ink); color: var(--paper); }
-.chip { font-size: 11.5px; line-height: 1.25; padding: 2px 4px; border-radius: 4px; border-left: 3px solid var(--st, var(--muted)); background: color-mix(in srgb, var(--st, var(--muted)) 14%, transparent); }
-.chip b { font-weight: 600; }
-.chip .sc { float: right; font-family: var(--display); font-weight: 600; }
+.chip { display: flex; align-items: center; gap: 3px; font-size: 11.5px; line-height: 1.25; padding: 2px 4px;
+  border-radius: 4px; border-left: 3px solid var(--line); background: var(--soft); }
+/* A run is coloured by that morning's recovery (Whoop bands), not by its score. */
+.chip.rec-hi { border-left-color: var(--rec-hi); background: color-mix(in srgb, var(--rec-hi) 18%, transparent); }
+.chip.rec-mid { border-left-color: var(--rec-mid); background: color-mix(in srgb, var(--rec-mid) 18%, transparent); }
+.chip.rec-lo { border-left-color: var(--rec-lo); background: color-mix(in srgb, var(--rec-lo) 18%, transparent); }
+.chip.st-upcoming { background: transparent; border: 1px dashed var(--line); border-left-width: 3px; }
+.chip.st-missed .tg { text-decoration: line-through; }
+.chip.st-missed .mk { color: var(--missed); }
+.chip .sc { margin-left: auto; font-family: var(--display); font-weight: 600; }
+.icons { display: flex; gap: 4px; color: var(--muted); }
+.card.rec-hi { border-top: 4px solid var(--rec-hi); } .card.rec-mid { border-top: 4px solid var(--rec-mid); }
+.card.rec-lo { border-top: 4px solid var(--rec-lo); }
 .st-done { --st: var(--done); } .st-short { --st: var(--short); } .st-over { --st: var(--over); }
 .st-missed { --st: var(--missed); } .st-moved { --st: var(--moved); } .st-excused { --st: var(--excused); }
-.st-upcoming { --st: var(--muted); background: transparent; border: 1px dashed var(--line); border-left: 3px solid var(--line); }
-.st-missed b { text-decoration: line-through; }
 .extra { font-size: 11px; color: var(--muted); line-height: 1.25; }
 .rec { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; }
 .rec.hi { background: var(--rec-hi); } .rec.mid { background: var(--rec-mid); } .rec.lo { background: var(--rec-lo); }
@@ -110,9 +118,8 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
   .cal { grid-template-columns: 30px repeat(7, minmax(0, 1fr)); gap: 3px; min-width: 0; }
   .wl { font-size: 10.5px; } .wl .num { font-size: 15px; }
   .day { min-height: 70px; padding: 3px 3px 7px; }
-  .chip { font-size: 10.5px; padding: 1px 2px; border-left-width: 2px; white-space: nowrap; overflow: hidden; }
-  .chip .sc, .chip b, .km { display: none; }
-  .chip::before { content: attr(data-k); font-weight: 600; margin-right: 2px; }
+  .chip { font-size: 10.5px; padding: 1px 2px; border-left-width: 2px; }
+  .chip .sc, .chip .tg, .km { display: none; }
 }
 </style>
 </head>
@@ -194,7 +201,6 @@ function showPage(name) {
 }
 window.addEventListener("hashchange", () => showPage(location.hash.slice(1)));
 const GOAL = { half: "Half marathon", marathon: "Marathon" };
-const STATUS = ["done", "short", "over", "moved", "missed", "excused", "upcoming"];
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const pad = (n) => String(n).padStart(2, "0");
@@ -221,63 +227,86 @@ function render(d) {
 }
 
 function renderToday(d) {
-  const t = d.days.find((x) => x.date === d.today);
-  const plan = t && t.planned.length ? t.planned.map((s) => `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${paceText(s)}${s.zone_max ? ` · Z${s.zone_max} max` : ""}`).join(" + ") : "Rest day";
-  const note = t && t.planned.map((s) => s.note).filter(Boolean).join(" · ");
-  const ck = t && t.checkin;
-  const ckText = ck ? `${ck.decision.toUpperCase()}${ck.adjusted_target ? ` → ${target(ck.adjusted_target, t.planned[0]?.unit)}` : ""}` : "Not yet";
+  const t = d.days.find((x) => x.date === d.today) || {};
+  const ck = t.checkin, last = d.last_session, next = d.next_session;
+  const how = [t.hrv != null ? `HRV ${t.hrv} ms` : "No Whoop reading yet",
+    ck && ck.feel != null ? `feel ${ck.feel}/10` : "",
+    ck ? `check-in: ${ck.decision}` : "check-in: not yet"].filter(Boolean);
+  const lastLine = last && `${icon(last.kind)} ${esc(KIND[last.kind] || last.kind)} ${Math.round(last.minutes)}′${last.km ? ` · ${last.km.toFixed(1)} km` : ""}`;
+  const s = next && next.session;
   $("today").innerHTML = `
-    <div class="card"><div class="label">${esc(fmt(d.today, { weekday: "long", day: "numeric", month: "long" }))}</div>
-      <div class="big">${esc(plan)}</div>${note ? `<div class="sub">${esc(note)}</div>` : ""}</div>
-    <div class="card"><div class="label">Morning check-in</div><div class="big">${esc(ckText)}</div>
-      <div class="sub">${esc(ck ? ck.reason : "Say “check in” to Claude to decide today.")}</div></div>
-    <div class="card"><div class="label">Recovery this morning</div>
-      <div class="big">${t && t.recovery != null ? `${Math.round(t.recovery)}%` : "–"}</div>
-      <div class="sub">${t && t.hrv != null ? `HRV ${t.hrv} ms` : "No Whoop reading yet"}</div></div>`;
+    <div class="card ${t.recovery != null ? `rec-${recBand(t.recovery)}` : ""}">
+      <div class="label">How you are · ${esc(fmt(d.today, { weekday: "long", day: "numeric", month: "long" }))}</div>
+      <div class="big">${t.recovery != null ? `${Math.round(t.recovery)}%` : "–"}</div>
+      <div class="sub">${how.map(esc).join(" · ")}</div></div>
+    <div class="card"><div class="label">Last session</div>
+      ${last ? `<div class="big">${lastLine}</div><div class="sub">${esc(fmt(last.date, { weekday: "long", day: "numeric", month: "short" }))}${last.recovery != null ? esc(` · recovery that morning ${Math.round(last.recovery)}%`) : ""}</div>`
+             : `<div class="sub">Nothing recorded yet.</div>`}</div>
+    <div class="card"><div class="label">Next session</div>
+      ${s ? `<div class="big">${icon(s.kind)} ${esc(KIND[s.kind] || s.kind)} ${esc(target(s.target, s.unit))}</div>
+             <div class="sub">${esc(fmt(next.date, { weekday: "long", day: "numeric", month: "short" }))}${paceText(s)}${s.zone_max ? ` · zone ${s.zone_max} max` : ""}</div>`
+          : `<div class="sub">No session planned.</div>`}</div>`;
 }
 
 // Temporary: Task 4 replaces this with the Program page.
 function renderProgram(d) {}
 
-function chip(s) {
-  const sc = s.score || { status: "upcoming" };
+const MARK = { done: "✓", over: "✓", short: "~", moved: "↔", missed: "✗", excused: "rest", upcoming: "" };
+let view = { offset: 0, all: false };   // weeks shifted from the default last / this / next window
+
+function chip(s, day) {
+  const sc = s.score || { status: "upcoming" }, st = sc.status;
   const [t, u] = sc.adjusted ? [sc.planned, sc.unit] : [s.target, s.unit];
-  const st = sc.status, tgt = u === "km" && +t ? `${+t}<span class="km"> km</span>` : esc(target(t, u));
+  const rec = ["done", "over", "short"].includes(st) && day.recovery != null ? `rec-${recBand(day.recovery)}` : "";
   const score = sc.adherence != null && st !== "upcoming" && st !== "excused" ? `<span class="sc">${Math.round(sc.adherence)}</span>` : "";
-  return `<div class="chip st-${st}" data-k="${esc((KIND[s.kind] || s.kind)[0])}">${score}<b>${esc(KIND[s.kind] || s.kind)}</b> ${st === "excused" ? "rest" : tgt}</div>`;
+  return `<div class="chip st-${st} ${rec}" title="${esc(`${KIND[s.kind] || s.kind}: ${st}`)}">${icon(s.kind)}<span class="mk">${MARK[st]}</span><span class="tg">${esc(target(t, u))}</span>${score}</div>`;
 }
 
-function doneLine(day) {
-  const runs = day.done.filter((a) => a.kind === "run");
-  // Walks and unnamed movement stay in the day detail; on the calendar they are noise, not training.
-  const other = new Set(day.done.filter((a) => !["run", "walk", "other"].includes(a.kind) && !day.planned.some((p) => p.kind === a.kind)).map((a) => a.kind));
-  const parts = [];
-  const km = runs.reduce((t, a) => t + a.km, 0);   // 0 = no GPS (a Whoop-only run), so unknown, not zero
-  if (runs.length) parts.push(`${Math.round(runs.reduce((t, a) => t + a.minutes, 0))}′${km ? `<span class="km"> · ${km.toFixed(1)} km</span>` : ""}`);
-  other.forEach((k) => parts.push(`+ ${esc(KIND[k] || k)}`));
-  return parts.length ? `<div class="extra">${parts.join(" ")}</div>` : "";
+function extras(day) {
+  // Activities that were not planned, as icons. Walks and unnamed movement stay in the day detail.
+  const kinds = new Set(day.done.filter((a) => !["walk", "other"].includes(a.kind) &&
+    !day.planned.some((p) => ICON[p.kind] === ICON[a.kind])).map((a) => a.kind));
+  return kinds.size ? `<div class="icons">${[...kinds].map((k) => `<span title="${esc(KIND[k] || k)}">${icon(k)}</span>`).join("")}</div>` : "";
 }
 
 function renderCalendar(d) {
-  $("legend").innerHTML = STATUS.map((s) => `<span class="st-${s}"><i></i>${s}</span>`).join("") +
-    `<span>bottom edge = recovery (green / yellow / red)</span><span>R / M / G = check-in rest, modify, go</span>`;
+  $("legend").innerHTML = `<span class="chip rec-hi">recovery 67%+</span><span class="chip rec-mid">34-66%</span>` +
+    `<span class="chip rec-lo">under 34%</span><span>✓ done · ~ short · ✗ missed · ↔ moved · number = score</span>`;
+  const rows = [];
+  for (let i = 0; i < d.days.length; i += 7) rows.push(d.days.slice(i, i + 7));
+  const cur = Math.max(0, rows.findIndex((r) => r.some((x) => x.date === d.today)));
+  const maxLo = Math.max(0, rows.length - 3);
+  const lo = view.all ? 0 : Math.min(maxLo, Math.max(0, cur - 1 + view.offset));
+  const hi = view.all ? rows.length : Math.min(rows.length, lo + 3);
+  $("earlier").disabled = view.all || lo === 0;
+  $("later").disabled = view.all || hi >= rows.length;
+  $("zoom").textContent = view.all ? "Three weeks" : "All weeks";
   const weeks = new Map(d.weeks.map((w) => [w.start, w]));
   let html = `<div></div>` + ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((x) => `<div class="dow">${x}</div>`).join("");
-  d.days.forEach((day, i) => {
-    if (i % 7 === 0) {
-      const w = weeks.get(day.date);
-      html += `<div class="wl"><span>${esc(fmt(day.date, { day: "numeric", month: "short" }))}</span>${w && w.adherence != null ? `<span class="num">${Math.round(w.adherence)}</span>` : ""}</div>`;
-    }
-    const n = parse(day.date).getDate();
-    const ck = day.checkin ? `<span class="ck" title="check-in: ${esc(day.checkin.decision)}">${day.checkin.decision[0].toUpperCase()}</span>` : "";
-    html += `<button class="day ${day.date === d.today ? "today" : ""} ${day.date > d.today ? "future" : ""}" data-date="${day.date}" aria-label="${esc(fmt(day.date, { weekday: "long", day: "numeric", month: "long" }))}">
-      <span class="dn"><span>${n === 1 || i === 0 ? esc(fmt(day.date, { day: "numeric", month: "short" })) : n}</span>${ck}</span>
-      ${day.planned.map(chip).join("")}${doneLine(day)}
-      ${day.recovery != null ? `<span class="rec ${recBand(day.recovery)}" title="recovery ${Math.round(day.recovery)}%"></span>` : ""}
-    </button>`;
+  rows.slice(lo, hi).forEach((row) => {
+    const w = weeks.get(row[0].date);
+    html += `<div class="wl"><span>${esc(fmt(row[0].date, { day: "numeric", month: "short" }))}</span>${w && w.adherence != null ? `<span class="num">${Math.round(w.adherence)}</span>` : ""}</div>`;
+    row.forEach((day) => {
+      const ck = day.checkin ? `<span class="ck" title="check-in: ${esc(day.checkin.decision)}">${esc(day.checkin.decision[0].toUpperCase())}</span>` : "";
+      html += `<button class="day ${day.date === d.today ? "today" : ""} ${day.date > d.today ? "future" : ""}" data-date="${day.date}" aria-label="${esc(fmt(day.date, { weekday: "long", day: "numeric", month: "long" }))}">
+        <span class="dn"><span>${parse(day.date).getDate()}</span>${ck}</span>
+        ${day.planned.map((s) => chip(s, day)).join("")}${extras(day)}
+        ${day.recovery != null ? `<span class="rec ${recBand(day.recovery)}" title="recovery ${Math.round(day.recovery)}%"></span>` : ""}
+      </button>`;
+    });
   });
   $("cal").innerHTML = html;
 }
+
+function moveWeeks(change) {
+  if (change === "zoom") view.all = !view.all; else view.offset += change;
+  view.offset = Math.max(-(data.days.length / 7), Math.min(data.days.length / 7, view.offset));
+  renderCalendar(data);
+  if (selected) showDay(selected);
+}
+$("earlier").addEventListener("click", () => moveWeeks(-1));
+$("later").addEventListener("click", () => moveWeeks(1));
+$("zoom").addEventListener("click", () => moveWeeks("zoom"));
 
 function showDay(date) {
   selected = date;
