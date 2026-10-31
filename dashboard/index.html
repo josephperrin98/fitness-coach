@@ -58,6 +58,8 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .big { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.1; }
 
 /* pages */
+/* Author display rules (grid, flex) override the browser's default [hidden] style, so force it. */
+[hidden] { display: none !important; }
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
 .tabs a { font-family: var(--display); font-size: 16px; text-transform: uppercase; letter-spacing: .08em;
   color: var(--muted); text-decoration: none; padding: 8px 14px; border-bottom: 3px solid transparent; }
