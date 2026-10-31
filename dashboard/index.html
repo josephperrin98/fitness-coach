@@ -18,12 +18,6 @@
   --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
   --text: "Barlow", "Helvetica Neue", Arial, sans-serif;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #141310; --card: #1c1a16; --ink: #ede8dc; --muted: #9c968a; --line: #302d27; --soft: #25221d;
-  --accent: #e2623f;
-  --done: #4cb276; --short: #e0a63a; --over: #6f9ce2; --missed: #e3624f; --moved: #b18ad8; --excused: #7a756a;
-  --rec-hi: #47b872; --rec-mid: #dcb042; --rec-lo: #e3604f; color-scheme: dark;
-} }
 :root[data-theme="dark"] {
   --paper: #141310; --card: #1c1a16; --ink: #ede8dc; --muted: #9c968a; --line: #302d27; --soft: #25221d;
   --accent: #e2623f;
@@ -63,17 +57,19 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; min-width: 0; }
 .big { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.1; }
 
-/* weeks */
-.weeks { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(64px, 1fr); gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-.wk { display: grid; grid-template-rows: auto 120px auto auto; gap: 6px; text-align: center; padding: 8px 4px; border-radius: 8px; }
-.wk.now { background: var(--soft); }
-.wk .adh { font-size: 22px; font-weight: 600; }
-.bars { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
-.bar { width: 16px; border-radius: 3px 3px 0 0; }
-.bar.plan { border: 1.5px solid var(--muted); border-bottom: 0; }
-.bar.act { background: var(--ink); }
-.wk.future .bar.plan { border-style: dashed; }
-.wk small { color: var(--muted); font-size: 12px; line-height: 1.3; }
+/* pages */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+.tabs a { font-family: var(--display); font-size: 16px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted); text-decoration: none; padding: 8px 14px; border-bottom: 3px solid transparent; }
+.tabs a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+.wnav { display: flex; align-items: center; gap: 8px; }
+.wnav h2 { margin-right: auto; }
+.wnav button:disabled { opacity: .35; cursor: default; }
+.wait { color: var(--muted); }
+.wait ul { margin: 6px 0 0; padding-left: 18px; }
+.ico { width: 15px; height: 15px; flex: none; vertical-align: -2px; fill: none; stroke: currentColor;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.big .ico { width: 26px; height: 26px; vertical-align: -3px; }
 
 /* calendar */
 .cal-scroll { overflow-x: auto; }
@@ -106,21 +102,9 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
 .legend i { width: 10px; height: 10px; border-radius: 2px; background: var(--st, var(--muted)); display: inline-block; }
 
-/* activity cost */
-.cost { display: grid; gap: 6px; }
-.crow { display: grid; grid-template-columns: minmax(90px, 140px) 1fr 104px; gap: 10px; align-items: center; font-size: 14px; }
-.crow.thin { opacity: .5; }
-.track { position: relative; height: 18px; }
-.track::before { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; border-left: 1px solid var(--muted); }
-.fill { position: absolute; top: 3px; height: 12px; border-radius: 2px; }
-.fill.neg { background: var(--accent); right: 50%; }
-.fill.pos { background: var(--done); left: 50%; }
-.crow .v { font-size: 13px; color: var(--muted); }
-.crow .v b { color: var(--ink); font-family: var(--display); font-size: 16px; font-weight: 600; }
 .rule { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; max-width: 75ch; }
 @media (max-width: 520px) {
   header { grid-template-columns: 1fr; } .count { text-align: left; }
-  .crow { grid-template-columns: 1fr 96px; } .crow .track { grid-column: 1 / -1; grid-row: 2; }
   .cal { grid-template-columns: 30px repeat(7, minmax(0, 1fr)); gap: 3px; min-width: 0; }
   .wl { font-size: 10.5px; } .wl .num { font-size: 15px; }
   .day { min-height: 70px; padding: 3px 3px 7px; }
@@ -132,6 +116,14 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 </head>
 <body>
 <div class="wrap">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-run" viewBox="0 0 24 24"><path d="M3 17h12l3-2 3 1v3H3zM6 17l2-7 4 2 1-3"/></symbol>
+    <symbol id="i-strength" viewBox="0 0 24 24"><path d="M6 7v10M18 7v10M3 10v4M21 10v4M6 12h12"/></symbol>
+    <symbol id="i-ride" viewBox="0 0 24 24"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9l2 7"/></symbol>
+    <symbol id="i-kite" viewBox="0 0 24 24"><path d="M12 3l6 7-6 7-6-7zM12 17c0 2-2 2-2 4"/></symbol>
+    <symbol id="i-football" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8l3.5 2.5-1.3 4h-4.4l-1.3-4z"/></symbol>
+    <symbol id="i-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></symbol>
+  </svg>
   <header>
     <div>
       <div class="label">Training log · plan, Strava and Whoop together</div>
@@ -143,28 +135,39 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
     <ul class="issues" id="issues"></ul>
   </header>
 
-  <section>
-    <h2>Today</h2>
+  <nav class="tabs" aria-label="Pages">
+    <a href="#today">Today</a><a href="#program">Program</a><a href="#progress">Progress</a>
+  </nav>
+
+  <section id="page-today">
     <div class="today" id="today"></div>
-  </section>
-
-  <section>
-    <h2>Weeks</h2>
-    <p class="sub">Adherence on top (did you do what was planned), km planned (outline) against km run (solid), and execution underneath (share of minutes inside the planned heart-rate ceiling).</p>
-    <div class="weeks" id="weeks"></div>
-  </section>
-
-  <section>
-    <h2>Calendar</h2>
+    <div class="wnav"><h2>Weeks</h2>
+      <button class="linkbtn" id="earlier" aria-label="One week earlier">‹</button>
+      <button class="linkbtn" id="later" aria-label="One week later">›</button>
+      <button class="linkbtn" id="zoom">All weeks</button></div>
     <div class="legend" id="legend"></div>
     <div class="cal-scroll"><div class="cal" id="cal"></div></div>
     <div class="card detail" id="detail"><span class="sub">Pick a day to see the plan, what you did, the score and the morning's recovery.</span></div>
   </section>
 
-  <section>
-    <h2>What each day costs you</h2>
-    <p class="sub" id="costsub">The next morning's HRV against your own median, by what you did the day before.</p>
-    <div class="cost" id="cost"></div>
+  <section id="page-program" hidden>
+    <h2>This week and next</h2>
+    <div id="program"></div>
+    <h2>Route to race day</h2>
+    <p class="sub">Planned kilometres for each week until the race.</p>
+    <div class="route" id="route"></div>
+  </section>
+
+  <section id="page-progress" hidden>
+    <h2>Progress</h2>
+    <div class="card wait">
+      <p>This page comes once the route and drift exist (build steps 2 and 4). It will show:</p>
+      <ul>
+        <li>the planned VDOT line, with a dot for each test you confirmed</li>
+        <li>weekly volume planned against done, a tick or cross and the adherence score for each week</li>
+        <li>pace adherence, a fitness curve, and your bests (1 km to half) for the last 4 weeks against the 4 before</li>
+      </ul>
+    </div>
   </section>
 
   <p class="rule">How the score works: falling short costs 1 point per 1% under target, going over costs 0.5 points per 1% over, a session done on another day of the same week loses 10 points, and a missed one scores 0. Within 5% of target is labelled done. A rest or a smaller session agreed at the morning check-in is scored against the new target. The numbers are computed by coach-core in Python; this page only draws them.</p>
@@ -173,6 +176,21 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 <script>
 "use strict";
 const KIND = { easy: "Easy", quality: "Quality", long: "Long", test: "Test", football: "Football", strength: "Gym", run: "Run", ride: "Ride", walk: "Walk", kite: "Kite", racket: "Racket", dance: "Dance", other: "Other" };
+
+// One icon per activity kind, so a day reads at a glance (spec, Dashboard). Runs of every kind wear the shoe.
+const ICON = { easy: "run", quality: "run", long: "run", test: "run", run: "run",
+  strength: "strength", ride: "ride", kite: "kite", football: "football" };
+const icon = (kind) => `<svg class="ico" aria-hidden="true"><use href="#i-${ICON[kind] || "dot"}"/></svg>`;
+const PAGES = ["today", "program", "progress"];
+function showPage(name) {
+  if (!PAGES.includes(name)) name = "today";
+  PAGES.forEach((p) => {
+    $(`page-${p}`).hidden = p !== name;
+    const a = document.querySelector(`.tabs a[href="#${p}"]`);
+    if (p === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+}
+window.addEventListener("hashchange", () => showPage(location.hash.slice(1)));
 const GOAL = { half: "Half marathon", marathon: "Marathon" };
 const STATUS = ["done", "short", "over", "moved", "missed", "excused", "upcoming"];
 const $ = (id) => document.getElementById(id);
@@ -195,7 +213,7 @@ function render(d) {
   data = d;
   $("goal").textContent = d.goal ? `${GOAL[d.goal.kind] || d.goal.kind} · ${fmt(d.goal.race_date, { day: "numeric", month: "short", year: "numeric" })}` : "No confirmed plan yet";
   $("days").textContent = d.goal ? d.goal.days_to_race : "–";
-  renderToday(d); renderWeeks(d); renderCalendar(d); renderCost(d.activity_cost);
+  renderToday(d); renderCalendar(d); renderProgram(d);
   const keep = d.days.find((x) => x.date === (selected || d.today)) || d.days.find((x) => x.date === d.today);
   if (keep) showDay(keep.date);
 }
@@ -216,20 +234,8 @@ function renderToday(d) {
       <div class="sub">${t && t.hrv != null ? `HRV ${t.hrv} ms` : "No Whoop reading yet"}</div></div>`;
 }
 
-function renderWeeks(d) {
-  const max = Math.max(1, ...d.weeks.map((w) => Math.max(w.planned_km || 0, w.actual_km || 0)));
-  const thisMon = ymd(addDays(parse(d.today), -((parse(d.today).getDay() + 6) % 7)));
-  $("weeks").innerHTML = d.weeks.map((w) => {
-    const future = w.start > d.today, h = (km) => `${Math.round(100 * (km || 0) / max)}%`;
-    return `<div class="wk ${w.start === thisMon ? "now" : ""} ${future ? "future" : ""}">
-      <div class="adh num">${w.adherence != null ? Math.round(w.adherence) : "·"}</div>
-      <div class="bars"><div class="bar plan" style="height:${h(w.planned_km)}" title="planned ${w.planned_km} km"></div>
-        ${future ? "" : `<div class="bar act" style="height:${h(w.actual_km)}" title="ran ${w.actual_km} km"></div>`}</div>
-      <small class="num">${future ? `${w.planned_km} km` : `${w.actual_km ?? 0}/${w.planned_km} km`}</small>
-      <small>${esc(fmt(w.start, { day: "numeric", month: "short" }))}<br>${w.execution != null ? `exec ${Math.round(w.execution)}%` : esc(w.type)}</small>
-    </div>`;
-  }).join("");
-}
+// Temporary: Task 4 replaces this with the Program page.
+function renderProgram(d) {}
 
 function chip(s) {
   const sc = s.score || { status: "upcoming" };
@@ -294,18 +300,6 @@ function showDay(date) {
   if (day.recovery != null) rows.push(["Morning", `recovery ${Math.round(day.recovery)}% · HRV ${day.hrv} ms`]);
   $("detail").innerHTML = `<div class="label">${esc(fmt(date, { weekday: "long", day: "numeric", month: "long", year: "numeric" }))}</div>
     <dl>${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`;
-}
-
-function renderCost(c) {
-  if (!c || !c.rows.length) { $("cost").innerHTML = `<p class="sub">Needs a few weeks of Whoop recoveries.</p>`; return; }
-  $("costsub").textContent = `The next morning's HRV against your own median (${c.baseline_hrv} ms), by what you did the day before. Faded rows have fewer than ${c.min_samples} days: not enough to trust yet.`;
-  const max = Math.max(5, ...c.rows.map((r) => Math.abs(r.hrv_change_pct)));
-  $("cost").innerHTML = c.rows.map((r) => {
-    const w = `${(50 * Math.abs(r.hrv_change_pct) / max).toFixed(1)}%`;
-    return `<div class="crow ${r.enough ? "" : "thin"}"><span>${esc(r.kind.replace("run: ", "Run · ").replace(/^\w/, (x) => x.toUpperCase()))}</span>
-      <div class="track"><div class="fill ${r.hrv_change_pct < 0 ? "neg" : "pos"}" style="width:${w}"></div></div>
-      <span class="v"><b>${r.hrv_change_pct > 0 ? "+" : ""}${r.hrv_change_pct}%</b> · n ${r.n}</span></div>`;
-  }).join("");
 }
 
 $("cal").addEventListener("click", (e) => { const b = e.target.closest(".day"); if (b) showDay(b.dataset.date); });
@@ -430,6 +424,7 @@ async function boot() {
   $("refresh").addEventListener("click", () => run(true));
   await run(false);
 }
+showPage(location.hash.slice(1));
 boot();
 </script>
 </body>
