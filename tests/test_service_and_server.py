@@ -153,3 +153,17 @@ def test_today_shows_pace_intent_and_bands(tmp_path):
     assert t["sessions_today"][0]["pace"] == "threshold"
     assert t["sessions_today"][0]["structure"] == "3 x 10 min"
     assert "threshold" in t["paces"]["paces"]
+
+
+def test_paces_are_capped_when_the_line_runs_ahead_of_the_last_test(tmp_path):
+    weeks = [{"start": s, "type": "foundation", "runs": 1, "km": 8, "quality": 1, "sessions": []}
+             for s in ("2026-10-19", "2026-10-26", "2026-11-02")]
+    plan = {"goal": "half", "race_date": "2027-03-14", "target_time": "1:20:00", "weeks": weeks}
+    c = Coach(str(tmp_path / "capped.db"))
+    proposal = c.propose(plan, "seed", author="user")
+    c.confirm(proposal["version"], set(proposal.get("findings", [])))
+    c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
+    p = c.paces(date(2026, 11, 3))
+    assert p["capped"] is True
+    assert p["vdot_used"] == 50.8
+    assert p["line_vdot"] > 50.8
