@@ -92,3 +92,31 @@ def test_activity_cost_compares_next_morning_to_median():
 
 def test_activity_cost_without_recovery_data():
     assert activity_cost([], [])["rows"] == []
+
+
+def test_dashboard_gives_today_and_program_what_they_draw():
+    store = CheckInStore(":memory:")
+    store.record(CheckIn(day=date(2026, 10, 21), decision="go", reason="fine", feel=6), PLAN)
+    acts = merge(actuals_from_strava(STRAVA), actuals_from_whoop(WHOOP))
+    recs = [{"date": "2026-10-21", "recovery": 72, "hrv": 61.0}]
+    out = dashboard(PLAN, store, acts, recs, today=date(2026, 10, 21), weeks_back=1, weeks_ahead=0)
+
+    assert out["last_session"] == {"date": "2026-10-21", "kind": "strength", "minutes": 40.0,
+                                   "km": 0.0, "recovery": 72}
+    assert out["next_session"]["date"] == "2026-10-23"
+    assert out["next_session"]["session"]["kind"] == "easy"
+    assert out["next_session"]["session"]["purpose"].startswith("Easy")
+    assert out["route"] == [{"start": "2026-10-19", "type": "foundation", "km": 15}]
+    wed = next(d for d in out["days"] if d["date"] == "2026-10-21")
+    assert wed["checkin"]["feel"] == 6
+    tue = next(d for d in out["days"] if d["date"] == "2026-10-20")
+    assert tue["planned"][0]["purpose"].startswith("Team sport")
+
+
+def test_walks_are_not_a_last_session():
+    walk = [{"sport_type": "Walk", "start_local": "2026-10-22T12:00:00",
+             "summary": {"distance": 3000, "moving_time": 1800}}]
+    acts = actuals_from_strava(STRAVA + walk)
+    out = dashboard(PLAN, CheckInStore(":memory:"), acts, [], today=date(2026, 10, 22),
+                    weeks_back=1, weeks_ahead=0)
+    assert out["last_session"]["kind"] == "football"

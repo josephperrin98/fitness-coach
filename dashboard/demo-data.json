@@ -17,6 +17,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
       "status": "done",
@@ -67,6 +68,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
       "status": "short",
@@ -110,6 +112,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
       "status": "done",
@@ -153,6 +156,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 8,
       "status": "done",
@@ -188,6 +192,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
       "status": "done",
@@ -231,6 +236,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
       "status": "done",
@@ -290,6 +296,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 9,
       "status": "done",
@@ -325,6 +332,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
       "status": "short",
@@ -375,6 +383,7 @@
      "note": "",
      "pace": "threshold",
      "structure": "6 x 3 min",
+     "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
       "status": "over",
@@ -418,6 +427,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
       "status": "short",
@@ -461,6 +471,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 10,
       "status": "short",
@@ -496,6 +507,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 0,
       "status": "excused",
@@ -512,6 +524,7 @@
    "checkin": {
     "decision": "rest",
     "reason": "caution area 4/10: gate says stop",
+    "feel": 5,
     "adjusted_target": null
    },
    "recovery": 53,
@@ -543,6 +556,7 @@
      "note": "",
      "pace": "threshold",
      "structure": "6 x 3 min",
+     "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
       "status": "moved",
@@ -602,6 +616,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 11,
       "status": "done",
@@ -637,6 +652,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
       "status": "short",
@@ -687,6 +703,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
       "status": "done",
@@ -746,6 +763,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 7,
       "status": "over",
@@ -781,6 +799,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
       "status": "done",
@@ -831,6 +850,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
       "status": "short",
@@ -874,6 +894,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
       "status": "missed",
@@ -910,6 +931,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 9,
       "status": "done",
@@ -945,6 +967,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20.0,
       "status": "done",
@@ -968,6 +991,7 @@
    "checkin": {
     "decision": "modify",
     "reason": "recovery 28%, short sleep",
+    "feel": 4,
     "adjusted_target": 20.0
    },
    "recovery": 66,
@@ -999,6 +1023,7 @@
      "note": "",
      "pace": "threshold",
      "structure": "6 x 3 min",
+     "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
       "status": "over",
@@ -1034,6 +1059,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
       "status": "done",
@@ -1085,6 +1111,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 10,
       "status": "short",
@@ -1120,6 +1147,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
       "status": "done",
@@ -1163,6 +1191,7 @@
      "note": "",
      "pace": "threshold",
      "structure": "6 x 3 min",
+     "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
       "status": "upcoming",
@@ -1179,6 +1208,7 @@
    "checkin": {
     "decision": "go",
     "reason": "recovery 71%, caution 0/10",
+    "feel": 8,
     "adjusted_target": null
    },
    "recovery": 88,
@@ -1195,6 +1225,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
       "status": "upcoming",
@@ -1223,6 +1254,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
       "status": "upcoming",
@@ -1259,6 +1291,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 11,
       "status": "upcoming",
@@ -1287,6 +1320,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
       "status": "upcoming",
@@ -1323,6 +1357,7 @@
      "note": "",
      "pace": "threshold",
      "structure": "6 x 3 min",
+     "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
       "status": "upcoming",
@@ -1351,6 +1386,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
       "status": "upcoming",
@@ -1395,6 +1431,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 12,
       "status": "upcoming",
@@ -1423,6 +1460,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 25,
       "status": "upcoming",
@@ -1459,6 +1497,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 25,
       "status": "upcoming",
@@ -1511,6 +1550,7 @@
      "note": "",
      "pace": null,
      "structure": "",
+     "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 8,
       "status": "upcoming",
@@ -1619,6 +1659,53 @@
    "adherence": null,
    "execution": null,
    "football": 0
+  }
+ ],
+ "last_session": {
+  "date": "2026-12-07",
+  "kind": "run",
+  "minutes": 29.7,
+  "km": 4.95,
+  "recovery": 68
+ },
+ "next_session": {
+  "date": "2026-12-09",
+  "session": {
+   "kind": "quality",
+   "target": 50,
+   "unit": "min",
+   "zone_max": null,
+   "note": "",
+   "pace": "threshold",
+   "structure": "6 x 3 min",
+   "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
+   "score": {
+    "planned": 50,
+    "status": "upcoming",
+    "actual": 0.0,
+    "actual_day": null,
+    "adherence": null,
+    "execution": null,
+    "adjusted": false
+   },
+   "pace_band": "4:11-4:21/km"
+  }
+ },
+ "route": [
+  {
+   "start": "2026-12-07",
+   "type": "foundation",
+   "km": 26
+  },
+  {
+   "start": "2026-12-14",
+   "type": "foundation",
+   "km": 28
+  },
+  {
+   "start": "2026-12-21",
+   "type": "recovery",
+   "km": 16
   }
  ],
  "activity_cost": {

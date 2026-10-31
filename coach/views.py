@@ -9,7 +9,7 @@ Three views in v0:
 from __future__ import annotations
 
 from dataclasses import asdict
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from statistics import mean, median
 from typing import Any, Callable
 
@@ -19,6 +19,20 @@ from .rules import RuleSet, load_rules
 from .score import Actual, score_week
 
 MIN_SAMPLES = 5   # below this, a view says "not enough data yet" instead of drawing a conclusion
+
+# One line per session on the Program page, keyed by pace intent, else by kind.
+PURPOSE = {
+    "easy": "Easy, conversational running: builds the aerobic base with little fatigue.",
+    "long": "The week's longest run, kept easy: builds endurance for the race distance.",
+    "threshold": "Comfortably hard: raises the pace you can hold for about an hour.",
+    "interval": "Hard repeats with recoveries: raises your maximal aerobic capacity.",
+    "race": "At goal race pace: practises the rhythm of race day.",
+    "quality": "The week's harder run: the structure says what to do.",
+    "test": "A maximal test: measures fitness so paces stay honest.",
+    "football": "Team sport: counts as hard training, so keep the next day easy.",
+    "strength": "Strength work: sturdier legs and more economical running.",
+}
+NOT_TRAINING = ("walk", "other")   # shown in the day detail, never as the last session
 
 
 def dashboard(plan: Plan | None, checkins: CheckInStore, actuals: list[Actual],
@@ -59,7 +73,7 @@ def dashboard(plan: Plan | None, checkins: CheckInStore, actuals: list[Actual],
             "planned": [_session(x, scored.get((x.day, x.kind))) for x in planned],
             "done": [{"kind": a.kind, "minutes": a.minutes, "km": a.km, "strain": a.strain}
                      for a in actuals if a.day == d],
-            "checkin": {"decision": c.decision, "reason": c.reason,
+            "checkin": {"decision": c.decision, "reason": c.reason, "feel": c.feel,
                         "adjusted_target": c.adjusted_target} if c else None,
             "recovery": rec["recovery"] if rec else None,
             "hrv": rec["hrv"] if rec else None,
@@ -72,8 +86,33 @@ def dashboard(plan: Plan | None, checkins: CheckInStore, actuals: list[Actual],
                  "days_to_race": (plan.race_date - today).days} if plan else None,
         "days": days,
         "weeks": weeks,
+        "last_session": _last_session(actuals, rec_by_day, today),
+        "next_session": _next_session(days, today),
+        "route": [{"start": w.start.isoformat(), "type": w.type, "km": w.km}
+                  for w in (plan.weeks if plan else ()) if w.start >= monday],
         "activity_cost": activity_cost(actuals, recoveries, plan),
     }
+
+
+def _last_session(actuals: list[Actual], rec_by_day: dict, today: date) -> dict[str, Any] | None:
+    past = [a for a in actuals if a.day <= today and a.kind not in NOT_TRAINING]
+    if not past:
+        return None
+    a = max(past, key=lambda x: (x.day, x.start or datetime.min))
+    rec = rec_by_day.get(a.day)
+    return {"date": a.day.isoformat(), "kind": a.kind, "minutes": a.minutes, "km": a.km,
+            "recovery": rec["recovery"] if rec else None}
+
+
+def _next_session(days: list[dict], today: date) -> dict[str, Any] | None:
+    # Returns the day's own session dict, not a copy, so add_pace_bands fills it too.
+    for d in days:
+        if d["date"] < today.isoformat():
+            continue
+        for s in d["planned"]:
+            if s.get("score", {"status": "upcoming"})["status"] == "upcoming":
+                return {"date": d["date"], "session": s}
+    return None
 
 
 def add_pace_bands(out: dict[str, Any], bands_for: Callable[[date], dict[str, str]]) -> dict[str, Any]:
@@ -141,7 +180,7 @@ def _label(d: date, acts: list[Actual], plan: Plan | None) -> str:
 
 def _session(x, score) -> dict[str, Any]:
     out = {"kind": x.kind, "target": x.target, "unit": x.unit, "zone_max": x.zone_max, "note": x.note,
-           "pace": x.pace, "structure": x.structure}
+           "pace": x.pace, "structure": x.structure, "purpose": PURPOSE.get(x.pace or x.kind)}
     if score:
         s = asdict(score)
         out["score"] = {k: (v.isoformat() if isinstance(v, date) else v) for k, v in s.items()

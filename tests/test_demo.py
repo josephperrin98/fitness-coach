@@ -34,3 +34,9 @@ def test_demo_follows_its_own_check_ins():
 def test_demo_quality_sessions_carry_a_pace_band():
     quality = [s for d in demo_dashboard()["days"] for s in d["planned"] if s["kind"] == "quality"]
     assert quality and all(s["pace"] == "threshold" and s["pace_band"].endswith("/km") for s in quality)
+
+
+def test_demo_has_a_last_and_next_session_and_a_route():
+    d = demo_dashboard()
+    assert d["last_session"]["date"] <= DEMO_TODAY.isoformat() <= d["next_session"]["date"]
+    assert d["route"][0]["start"] == "2026-12-07"

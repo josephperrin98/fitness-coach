@@ -195,3 +195,12 @@ def test_dashboard_shows_each_session_pace_band(tmp_path):
     c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
     after = tuesday(c.dashboard(MON, "[]", "[]", "[]"))
     assert after["pace_band"] == c.paces(date(2026, 10, 20))["paces"]["threshold"]
+
+
+def test_next_session_carries_its_pace_band(tmp_path):
+    c = Coach(str(tmp_path / "paced.db"))
+    c.confirm(c.propose(PACED, "seed", author="user")["version"], set())
+    c.record_checkpoint(Checkpoint(day=date(2026, 10, 19), kind="5k", distance_m=5000, seconds=1200))
+    nxt = c.dashboard(MON, "[]", "[]", "[]")["next_session"]
+    assert nxt["date"] == "2026-10-20"
+    assert nxt["session"]["pace_band"] == c.paces(date(2026, 10, 20))["paces"]["threshold"]
