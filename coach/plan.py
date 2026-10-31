@@ -89,6 +89,9 @@ class Week:
         return tuple(x for x in self.sessions if x.is_run)
 
 
+MIN_TARGET_SECONDS = 600   # no half or marathon goal is shorter than 10 minutes
+
+
 @dataclass(frozen=True)
 class Plan:
     goal: str                  # "half" | "marathon"
@@ -102,6 +105,10 @@ class Plan:
         starts = [w.start for w in self.weeks]
         if starts != sorted(starts):
             raise ValueError("weeks must be in chronological order")
+        if self.target_time is not None and self.target_time < MIN_TARGET_SECONDS:
+            raise ValueError(
+                f"target_time of {self.target_time} s is implausible (under 10 minutes); "
+                'quote the time in YAML, e.g. target_time: "1:30:00"')
 
     def week_of(self, day: date) -> Week | None:
         for w in self.weeks:
@@ -131,7 +138,7 @@ def plan_from_dict(data: dict[str, Any]) -> Plan:
     )
     target = data.get("target_time")
     return Plan(goal=data["goal"], race_date=_as_date(data["race_date"]), weeks=weeks,
-                target_time=_as_seconds(target) if target else None)
+                target_time=_as_seconds(target) if target is not None else None)
 
 
 def plan_to_dict(plan: Plan) -> dict[str, Any]:
@@ -178,10 +185,29 @@ def _as_date(value: Any) -> date:
 
 
 def _as_seconds(value: Any) -> int:
-    """'1:30:00' or '45:00' to seconds."""
+    """'1:30:00' or '45:00' to seconds; an int is already seconds.
+
+    The time must be quoted in YAML: YAML 1.1 reads an unquoted h:mm:ss as a
+    base-60 integer, so `1:45` arrives here as the int 105, not as 1h45.
+    """
+    if isinstance(value, bool):
+        raise ValueError(f"target_time {value!r} is not a time")
+    if isinstance(value, int):
+        return value
+    parts = str(value).split(":")
+    if len(parts) > 3:
+        raise ValueError(f"target_time {value!r} has more than three parts")
+    try:
+        numbers = [int(p) for p in parts]
+    except ValueError:
+        raise ValueError(f"target_time {value!r} is not h:mm:ss or mm:ss") from None
+    if any(n < 0 for n in numbers):
+        raise ValueError(f"target_time {value!r} has a negative part")
+    if any(n >= 60 for n in numbers[1:]):
+        raise ValueError(f"target_time {value!r}: minutes and seconds must be under 60")
     seconds = 0
-    for part in str(value).split(":"):
-        seconds = seconds * 60 + int(part)
+    for n in numbers:
+        seconds = seconds * 60 + n
     return seconds
 
 

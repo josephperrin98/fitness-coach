@@ -96,3 +96,23 @@ def test_unknown_pace_kind_is_refused():
     from coach.plan import Session
     with pytest.raises(ValueError, match="pace"):
         Session(day=date(2026, 11, 3), kind="easy", pace="sprinty")
+
+
+def _plan_with_target(target):
+    return {"goal": "half", "race_date": "2027-03-14", "target_time": target,
+            "weeks": [{"start": "2026-11-02", "type": "foundation", "runs": 1, "km": 8}]}
+
+
+def test_unquoted_yaml_target_time_is_refused():
+    import yaml
+    # YAML 1.1 reads an unquoted 1:45 as the base-60 integer 105 (seconds).
+    data = yaml.safe_load("goal: half\nrace_date: 2027-03-14\ntarget_time: 1:45\n"
+                          "weeks:\n  - {start: 2026-11-02, type: foundation, runs: 1, km: 8}\n")
+    with pytest.raises(ValueError, match="target_time"):
+        plan_from_dict(data)
+
+
+@pytest.mark.parametrize("bad", ["0:00:00", "1:75:00", "1:30:75", "-1:30:00", "a:b", "1:2:3:4"])
+def test_implausible_or_malformed_target_time_is_refused(bad):
+    with pytest.raises(ValueError, match="target_time"):
+        plan_from_dict(_plan_with_target(bad))
