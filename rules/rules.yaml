@@ -163,9 +163,10 @@ paces:
     provenance:
       source: literature
       note: >
-        Daniels and Gilbert's VDOT model (Daniels' Running Formula). The bands
-        sit inside Daniels' published ranges for easy, threshold and interval
-        running. Race pace is not a fraction: it is the race time the VDOT predicts.
+        Daniels and Gilbert's VDOT model (Daniels' Running Formula). Easy and
+        interval bands sit inside Daniels' ranges; the threshold band's upper
+        bound (0.90) is slightly above his threshold intensity, so its fast end
+        runs a little quick. Race pace is not a fraction: it is the race time the VDOT predicts.
   progression:
     cap_above_checkpoint: 1.0   # paces never assume more than 1 VDOT point above the last test
     target_lead_days: 14        # reach the target VDOT two weeks before the race
