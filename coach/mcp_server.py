@@ -17,6 +17,7 @@ from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
 from .checkins import CheckIn, CheckInError
+from .checkpoints import Checkpoint
 from .service import Coach
 
 mcp = MCPServer("coach-core")
@@ -36,6 +37,22 @@ def _json(obj) -> str:
 def get_today(day: str = "") -> str:
     """Today's planned sessions, the rest of the week, days to race, any check-in already recorded today, and the caution-gate thresholds. 'day' is YYYY-MM-DD; empty means today."""
     return _json(coach.today(_day(day)))
+
+
+@mcp.tool(annotations=READ)
+def get_paces(day: str = "") -> str:
+    """Pace bands (min:s per km) for easy, long, threshold, interval and race-pace running in the week of 'day' (YYYY-MM-DD, empty = today), from the last confirmed test and the planned VDOT line. 'capped' is true when the plan is ahead of the last test and paces were held back."""
+    return _json(coach.paces(_day(day)))
+
+
+@mcp.tool()
+def record_checkpoint(day: str, kind: str, distance_m: float, seconds: float) -> str:
+    """Save a test result AFTER the user has confirmed the numbers in the conversation. kind is '6min' (distance covered in the 6-minute test), '5k' (time trial) or 'race'. distance_m in metres, seconds is the effort's duration. Show the user the distance, time and resulting VDOT first; never save a result they have not confirmed."""
+    try:
+        c = Checkpoint(day=_day(day), kind=kind, distance_m=distance_m, seconds=seconds)
+        return _json({"saved": coach.record_checkpoint(c)})
+    except ValueError as e:
+        return _json({"refused": str(e)})
 
 
 @mcp.tool(annotations=READ)

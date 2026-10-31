@@ -167,3 +167,19 @@ def test_paces_are_capped_when_the_line_runs_ahead_of_the_last_test(tmp_path):
     assert p["capped"] is True
     assert p["vdot_used"] == 50.8
     assert p["line_vdot"] > 50.8
+
+
+def test_server_exposes_paces_and_checkpoints_but_still_no_confirm():
+    from coach import mcp_server
+    names = {t.name for t in asyncio.run(mcp_server.mcp.list_tools())}
+    assert {"get_paces", "record_checkpoint"} <= names
+    assert not any("confirm" in n for n in names)
+
+
+def test_record_checkpoint_tool_refuses_bad_input(tmp_path, monkeypatch):
+    from coach import mcp_server
+    monkeypatch.setattr(mcp_server, "coach", Coach(str(tmp_path / "server.db")))
+    out = json.loads(mcp_server.record_checkpoint("2026-10-22", "vibes", 5000, 1200))
+    assert "refused" in out
+    ok = json.loads(mcp_server.record_checkpoint("2026-10-22", "5k", 5000, 1200))
+    assert ok["saved"]["vdot"] == 49.8

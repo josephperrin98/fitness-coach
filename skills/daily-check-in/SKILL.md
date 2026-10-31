@@ -41,7 +41,8 @@ If one is missing, say which one and carry on with the others. Never invent a nu
    judgment and the user decides. Otherwise the call is **go**.
 
 7. **Present** the call in at most five lines:
-   - the decision and today's session (target and unit, as planned or adjusted)
+   - the decision and today's session (target and unit, as planned or adjusted; for a run
+     with a `pace`, its band from `get_today`'s `paces`, e.g. "threshold 4:11-4:20/km")
    - the two or three facts behind it, each with its source (Whoop, the gate, their score)
    - then ask: "Shall I record this?"
 
