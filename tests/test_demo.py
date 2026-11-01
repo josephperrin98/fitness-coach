@@ -38,5 +38,7 @@ def test_demo_quality_sessions_carry_a_pace_band():
 
 def test_demo_has_a_last_and_next_session_and_a_route():
     d = demo_dashboard()
-    assert d["last_session"]["date"] <= DEMO_TODAY.isoformat() <= d["next_session"]["date"]
-    assert d["route"][0]["start"] == "2026-12-07"
+    assert d["last_session"]["date"] == "2026-12-07"
+    assert d["next_session"]["date"] == "2026-12-09"
+    assert len(d["route"]) == 3
+    assert d["route"][0]["start"] == "2026-12-07" and d["route"][-1]["start"] == "2026-12-21"

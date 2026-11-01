@@ -132,3 +132,10 @@ def test_dashboard_sends_the_score_unit():
                     weeks_back=1, weeks_ahead=0)
     sat = next(d for d in out["days"] if d["date"] == "2026-10-24")
     assert sat["planned"][0]["score"]["unit"] == "km"
+
+
+def test_dashboard_with_no_plan_and_no_activities_has_no_sessions():
+    out = dashboard(None, CheckInStore(":memory:"), [], [], today=date(2026, 10, 21))
+    assert out["last_session"] is None
+    assert out["next_session"] is None
+    assert out["route"] == []
