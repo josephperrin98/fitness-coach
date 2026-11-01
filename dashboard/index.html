@@ -228,8 +228,8 @@ const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); r
 const fmt = (s, opts) => parse(s).toLocaleDateString("en-GB", opts);
 // No target (gym, football) means "turn up": show nothing rather than "0′".
 const target = (t, unit) => !+t ? "" : unit === "km" ? `${+t} km` : `${+t}′`;
-// Intent always shows; the band in m:ss/km only once a confirmed checkpoint exists.
-const paceText = (s) => !s.pace ? "" : ` · ${s.structure ? `${esc(s.structure)} ` : ""}${s.pace}${s.pace_band ? ` ${s.pace_band}` : ""}`;
+// Plain text: callers escape it once. Intent always shows; the band in m:ss/km only once a confirmed checkpoint exists.
+const paceText = (s) => !s.pace ? "" : ` · ${s.structure ? `${s.structure} ` : ""}${s.pace}${s.pace_band ? ` ${s.pace_band}` : ""}`;
 const recBand = (r) => r == null ? "" : r >= 67 ? "hi" : r >= 34 ? "mid" : "lo";   // Whoop's own colour bands
 
 let data = null, selected = null, liveShown = false;
@@ -262,7 +262,7 @@ function renderToday(d) {
              : `<div class="sub">Nothing recorded yet.</div>`}</div>
     <div class="card"><div class="label">Next session</div>
       ${s ? `<div class="big">${icon(s.kind)} ${esc(KIND[s.kind] || s.kind)} ${esc(target(s.target, s.unit))}</div>
-             <div class="sub">${esc(fmt(next.date, { weekday: "long", day: "numeric", month: "short" }))}${paceText(s)}${s.zone_max ? ` · zone ${s.zone_max} max` : ""}</div>`
+             <div class="sub">${esc(fmt(next.date, { weekday: "long", day: "numeric", month: "short" }))}${esc(paceText(s))}${s.zone_max ? ` · zone ${s.zone_max} max` : ""}</div>`
           : `<div class="sub">No session planned.</div>`}</div>`;
 }
 
