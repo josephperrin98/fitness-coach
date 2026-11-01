@@ -58,6 +58,24 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .big { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.1; }
 
 /* pages */
+/* program */
+.pweek { display: grid; gap: 8px; }
+.pweek h3 { font-family: var(--display); font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 8px 0 0; }
+.prow { display: grid; grid-template-columns: 48px 1fr; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.prow.today { outline: 2px solid var(--accent); outline-offset: 1px; }
+.pday { display: grid; justify-items: center; align-content: start; }
+.pday .num { font-size: 24px; font-weight: 600; line-height: 1; }
+.pbody { display: grid; gap: 2px; min-width: 0; }
+.ptitle { font-size: 16px; }
+.pmeta { font-family: var(--display); font-size: 15px; font-variant-numeric: tabular-nums; }
+.pres { font-size: 13px; color: var(--st, var(--muted)); font-weight: 600; }
+.route { display: grid; gap: 4px; }
+.rrow { display: grid; grid-template-columns: 64px 1fr 56px 84px; gap: 10px; align-items: center; font-size: 13px; }
+.rtrack { height: 12px; background: var(--soft); border-radius: 2px; }
+.rfill { height: 100%; border-radius: 2px; background: var(--ink); }
+.rfill.t-recovery { background: var(--muted); }
+.rrow small { color: var(--muted); }
+@media (max-width: 520px) { .rrow { grid-template-columns: 52px 1fr 52px; } .rrow small { display: none; } }
 /* Author display rules (grid, flex) override the browser's default [hidden] style, so force it. */
 [hidden] { display: none !important; }
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
@@ -249,7 +267,40 @@ function renderToday(d) {
 }
 
 // Temporary: Task 4 replaces this with the Program page.
-function renderProgram(d) {}
+function programRow(day, s, today) {
+  const sc = s.score || { status: "upcoming" }, st = sc.status;
+  const result = st === "upcoming" ? "" : [st,
+    sc.actual != null && st !== "missed" && st !== "excused" ? `${target(sc.actual, sc.unit)} done` : "",
+    sc.adherence != null && st !== "excused" ? `score ${Math.round(sc.adherence)}` : ""].filter(Boolean).join(" · ");
+  const meta = [s.pace ? `${s.pace} ${s.pace_band || "(band after your first confirmed test)"}` : "",
+    s.zone_max ? `heart rate zone ${s.zone_max} max` : ""].filter(Boolean).join(" · ");
+  return `<article class="prow ${day.date === today ? "today" : ""}">
+    <div class="pday"><span class="label">${esc(fmt(day.date, { weekday: "short" }))}</span><span class="num">${parse(day.date).getDate()}</span></div>
+    <div class="pbody">
+      <div class="ptitle">${icon(s.kind)} <b>${esc(KIND[s.kind] || s.kind)} ${esc(target(s.target, s.unit))}</b>${s.structure ? ` · ${esc(s.structure)}` : ""}</div>
+      ${meta ? `<div class="pmeta">${esc(meta)}</div>` : ""}
+      ${s.purpose ? `<div class="sub">${esc(s.purpose)}</div>` : ""}
+      ${s.note ? `<div class="sub">${esc(s.note)}</div>` : ""}
+      ${result ? `<div class="pres st-${st}">${esc(result)}</div>` : ""}
+    </div></article>`;
+}
+
+function renderProgram(d) {
+  const t = parse(d.today), mon = addDays(t, -((t.getDay() + 6) % 7));
+  $("program").innerHTML = [[mon, "This week"], [addDays(mon, 7), "Next week"]].map(([m, label]) => {
+    const from = ymd(m), to = ymd(addDays(m, 6));
+    const rows = d.days.filter((x) => x.date >= from && x.date <= to)
+      .flatMap((day) => day.planned.map((s) => programRow(day, s, d.today)));
+    return `<div class="pweek"><h3>${label} · ${esc(fmt(from, { day: "numeric", month: "short" }))}</h3>${rows.join("") || `<p class="sub">No sessions planned.</p>`}</div>`;
+  }).join("") + `<p class="sub wait">Coming with lap analysis (spec D33): whether each run matched its structure and pace band, for example “3 of 3 blocks in band”. Until then a past session shows its volume and score.</p>`;
+  const route = d.route || [];
+  const max = Math.max(1, ...route.map((w) => w.km || 0));
+  $("route").innerHTML = route.length ? route.map((w) => `<div class="rrow">
+      <span>${esc(fmt(w.start, { day: "numeric", month: "short" }))}</span>
+      <div class="rtrack"><div class="rfill t-${esc(w.type)}" style="width:${(100 * (w.km || 0) / max).toFixed(1)}%"></div></div>
+      <span class="num">${esc(w.km)} km</span><small>${esc(w.type)}</small></div>`).join("")
+    : `<p class="sub">No confirmed plan yet.</p>`;
+}
 
 const MARK = { done: "✓", over: "✓", short: "~", moved: "↔", missed: "✗", excused: "rest", upcoming: "" };
 let view = { offset: 0, all: false };   // weeks shifted from the default last / this / next window
