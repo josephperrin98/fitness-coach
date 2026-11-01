@@ -119,7 +119,6 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .card.rec-lo { border-top: 4px solid var(--rec-lo); }
 .st-done { --st: var(--done); } .st-short { --st: var(--short); } .st-over { --st: var(--over); }
 .st-missed { --st: var(--missed); } .st-moved { --st: var(--moved); } .st-excused { --st: var(--excused); }
-.extra { font-size: 11px; color: var(--muted); line-height: 1.25; }
 .rec { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; }
 .rec.hi { background: var(--rec-hi); } .rec.mid { background: var(--rec-mid); } .rec.lo { background: var(--rec-lo); }
 .detail { min-height: 64px; }
@@ -128,7 +127,6 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 .detail dd { margin: 0; }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--muted); }
 .legend span { display: inline-flex; align-items: center; gap: 5px; }
-.legend i { width: 10px; height: 10px; border-radius: 2px; background: var(--st, var(--muted)); display: inline-block; }
 
 .rule { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; max-width: 75ch; }
 @media (max-width: 520px) {
@@ -167,7 +165,7 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
   </nav>
 
   <section id="page-today">
-    <div class="today" id="today"></div>
+    <div class="today" id="today-cards"></div>
     <div class="wnav"><h2>Weeks</h2>
       <button class="linkbtn" id="earlier" aria-label="One week earlier">‹</button>
       <button class="linkbtn" id="later" aria-label="One week later">›</button>
@@ -179,10 +177,10 @@ header h1 { font-size: clamp(34px, 7vw, 56px); line-height: .95; text-transform:
 
   <section id="page-program" hidden>
     <h2>This week and next</h2>
-    <div id="program"></div>
+    <div id="program-weeks"></div>
     <h2>Route to race day</h2>
     <p class="sub">Planned kilometres for each week until the race.</p>
-    <div class="route" id="route"></div>
+    <div class="route" id="route-bars"></div>
   </section>
 
   <section id="page-progress" hidden>
@@ -218,6 +216,13 @@ function showPage(name) {
   });
 }
 window.addEventListener("hashchange", () => showPage(location.hash.slice(1)));
+// Clicking a tab swaps the page without moving the scroll position; replaceState keeps the URL shareable.
+document.querySelectorAll(".tabs a").forEach((a) => a.addEventListener("click", (e) => {
+  e.preventDefault();
+  const name = a.getAttribute("href").slice(1);
+  showPage(name);
+  try { history.replaceState(null, "", "#" + name); } catch {}
+}));
 const GOAL = { half: "Half marathon", marathon: "Marathon" };
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -230,6 +235,20 @@ const fmt = (s, opts) => parse(s).toLocaleDateString("en-GB", opts);
 const target = (t, unit) => !+t ? "" : unit === "km" ? `${+t} km` : `${+t}′`;
 // Plain text: callers escape it once. Intent always shows; the band in m:ss/km only once a confirmed checkpoint exists.
 const paceText = (s) => !s.pace ? "" : ` · ${s.structure ? `${s.structure} ` : ""}${s.pace}${s.pace_band ? ` ${s.pace_band}` : ""}`;
+// One result line for a scored session, plain text (callers escape): "status · actual · score".
+function resultText(sc, date) {
+  if (!sc || sc.status === "upcoming") return "";
+  const st = sc.status;
+  const parts = [st];
+  if (sc.actual != null && st !== "missed" && st !== "excused") {
+    let a = target(sc.actual, sc.unit);
+    if (sc.adjusted) a += ` against ${target(sc.planned, sc.unit)} agreed`;
+    if (sc.actual_day && sc.actual_day !== date) a += ` on ${fmt(sc.actual_day, { weekday: "short" })}`;
+    parts.push(a);
+  }
+  if (sc.adherence != null && st !== "excused") parts.push(`score ${Math.round(sc.adherence)}`);
+  return parts.join(" · ");
+}
 const recBand = (r) => r == null ? "" : r >= 67 ? "hi" : r >= 34 ? "mid" : "lo";   // Whoop's own colour bands
 
 let data = null, selected = null, liveShown = false;
@@ -252,7 +271,7 @@ function renderToday(d) {
     ck ? `check-in: ${ck.decision}` : "check-in: not yet"].filter(Boolean);
   const lastLine = last && `${icon(last.kind)} ${esc(KIND[last.kind] || last.kind)} ${Math.round(last.minutes)}′${last.km ? ` · ${last.km.toFixed(1)} km` : ""}`;
   const s = next && next.session;
-  $("today").innerHTML = `
+  $("today-cards").innerHTML = `
     <div class="card ${t.recovery != null ? `rec-${recBand(t.recovery)}` : ""}">
       <div class="label">How you are · ${esc(fmt(d.today, { weekday: "long", day: "numeric", month: "long" }))}</div>
       <div class="big">${t.recovery != null ? `${Math.round(t.recovery)}%` : "–"}</div>
@@ -269,9 +288,7 @@ function renderToday(d) {
 // Temporary: Task 4 replaces this with the Program page.
 function programRow(day, s, today) {
   const sc = s.score || { status: "upcoming" }, st = sc.status;
-  const result = st === "upcoming" ? "" : [st,
-    sc.actual != null && st !== "missed" && st !== "excused" ? `${target(sc.actual, sc.unit)} done` : "",
-    sc.adherence != null && st !== "excused" ? `score ${Math.round(sc.adherence)}` : ""].filter(Boolean).join(" · ");
+  const result = resultText(sc, day.date);
   const meta = [s.pace ? `${s.pace} ${s.pace_band || "(band after your first confirmed test)"}` : "",
     s.zone_max ? `heart rate zone ${s.zone_max} max` : ""].filter(Boolean).join(" · ");
   return `<article class="prow ${day.date === today ? "today" : ""}">
@@ -281,13 +298,13 @@ function programRow(day, s, today) {
       ${meta ? `<div class="pmeta">${esc(meta)}</div>` : ""}
       ${s.purpose ? `<div class="sub">${esc(s.purpose)}</div>` : ""}
       ${s.note ? `<div class="sub">${esc(s.note)}</div>` : ""}
-      ${result ? `<div class="pres st-${st}">${esc(result)}</div>` : ""}
+      ${result ? `<div class="pres st-${esc(st)}">${esc(result)}</div>` : ""}
     </div></article>`;
 }
 
 function renderProgram(d) {
   const t = parse(d.today), mon = addDays(t, -((t.getDay() + 6) % 7));
-  $("program").innerHTML = [[mon, "This week"], [addDays(mon, 7), "Next week"]].map(([m, label]) => {
+  $("program-weeks").innerHTML = [[mon, "This week"], [addDays(mon, 7), "Next week"]].map(([m, label]) => {
     const from = ymd(m), to = ymd(addDays(m, 6));
     const rows = d.days.filter((x) => x.date >= from && x.date <= to)
       .flatMap((day) => day.planned.map((s) => programRow(day, s, d.today)));
@@ -295,7 +312,7 @@ function renderProgram(d) {
   }).join("") + `<p class="sub wait">Coming with lap analysis (spec D33): whether each run matched its structure and pace band, for example “3 of 3 blocks in band”. Until then a past session shows its volume and score.</p>`;
   const route = d.route || [];
   const max = Math.max(1, ...route.map((w) => w.km || 0));
-  $("route").innerHTML = route.length ? route.map((w) => `<div class="rrow">
+  $("route-bars").innerHTML = route.length ? route.map((w) => `<div class="rrow">
       <span>${esc(fmt(w.start, { day: "numeric", month: "short" }))}</span>
       <div class="rtrack"><div class="rfill t-${esc(w.type)}" style="width:${(100 * (w.km || 0) / max).toFixed(1)}%"></div></div>
       <span class="num">${esc(w.km)} km</span><small>${esc(w.type)}</small></div>`).join("")
@@ -310,7 +327,7 @@ function chip(s, day) {
   const [t, u] = sc.adjusted ? [sc.planned, sc.unit] : [s.target, s.unit];
   const rec = ["done", "over", "short"].includes(st) && day.recovery != null ? `rec-${recBand(day.recovery)}` : "";
   const score = sc.adherence != null && st !== "upcoming" && st !== "excused" ? `<span class="sc">${Math.round(sc.adherence)}</span>` : "";
-  return `<div class="chip st-${st} ${rec}" title="${esc(`${KIND[s.kind] || s.kind}: ${st}`)}">${icon(s.kind)}<span class="mk">${MARK[st]}</span><span class="tg">${esc(target(t, u))}</span>${score}</div>`;
+  return `<div class="chip st-${esc(st)} ${rec}" title="${esc(`${KIND[s.kind] || s.kind}: ${st}`)}">${icon(s.kind)}<span class="mk">${MARK[st] ?? ""}</span><span class="tg">${esc(target(t, u))}</span>${score}</div>`;
 }
 
 function extras(day) {
@@ -339,7 +356,7 @@ function renderCalendar(d) {
     html += `<div class="wl"><span>${esc(fmt(row[0].date, { day: "numeric", month: "short" }))}</span>${w && w.adherence != null ? `<span class="num">${Math.round(w.adherence)}</span>` : ""}</div>`;
     row.forEach((day) => {
       const ck = day.checkin ? `<span class="ck" title="check-in: ${esc(day.checkin.decision)}">${esc(day.checkin.decision[0].toUpperCase())}</span>` : "";
-      html += `<button class="day ${day.date === d.today ? "today" : ""} ${day.date > d.today ? "future" : ""}" data-date="${day.date}" aria-label="${esc(fmt(day.date, { weekday: "long", day: "numeric", month: "long" }))}">
+      html += `<button class="day ${day.date === d.today ? "today" : ""} ${day.date > d.today ? "future" : ""}" data-date="${esc(day.date)}" aria-label="${esc(fmt(day.date, { weekday: "long", day: "numeric", month: "long" }))}">
         <span class="dn"><span>${parse(day.date).getDate()}</span>${ck}</span>
         ${day.planned.map((s) => chip(s, day)).join("")}${extras(day)}
         ${day.recovery != null ? `<span class="rec ${recBand(day.recovery)}" title="recovery ${Math.round(day.recovery)}%"></span>` : ""}
@@ -350,6 +367,7 @@ function renderCalendar(d) {
 }
 
 function moveWeeks(change) {
+  if (!data) return;
   if (change === "zoom") view.all = !view.all; else view.offset += change;
   view.offset = Math.max(-(data.days.length / 7), Math.min(data.days.length / 7, view.offset));
   renderCalendar(data);
@@ -367,11 +385,9 @@ function showDay(date) {
   day.planned.forEach((s) => {
     const sc = s.score;
     let v = `${KIND[s.kind] || s.kind} ${target(s.target, s.unit)}${paceText(s)}${s.zone_max ? ` (zone ${s.zone_max} max)` : ""}`;
-    if (sc && sc.status !== "upcoming") {
-      v += ` — ${sc.status}`;
-      if (sc.actual != null && sc.status !== "missed" && sc.status !== "excused") v += `: ${target(sc.actual, sc.unit)}${sc.adjusted ? ` against ${target(sc.planned, sc.unit)} agreed` : ""}`;
-      if (sc.actual_day && sc.actual_day !== date) v += ` on ${fmt(sc.actual_day, { weekday: "short" })}`;
-      if (sc.adherence != null && sc.status !== "excused") v += ` · score ${Math.round(sc.adherence)}`;
+    const res = sc && resultText(sc, date);
+    if (res) {
+      v += ` — ${res}`;
       if (sc.execution != null) v += ` · ${Math.round(sc.execution)}% in zone`;
     }
     rows.push(["Planned", v]);
