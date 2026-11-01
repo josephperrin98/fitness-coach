@@ -1,10 +1,14 @@
 """What the dashboard shows, computed here so it is tested and the page stays a renderer (D23).
 
-Three views in v0:
-  calendar         every day: what was planned, what was done, the score, the
+What dashboard() returns:
+  days             every day: what was planned, what was done, the score, the
                    check-in decision and that morning's recovery
   weeks            adherence and execution per week, planned vs actual km
   activity_cost    how each kind of activity moves the next morning's HRV and recovery
+                   (kept for a later HRV view; the page does not draw it yet)
+  last_session     the most recent training session actually done
+  next_session     the next planned session
+  route            the planned weeks ahead as blocks, for the Program page
 """
 from __future__ import annotations
 
@@ -184,5 +188,5 @@ def _session(x, score) -> dict[str, Any]:
     if score:
         s = asdict(score)
         out["score"] = {k: (v.isoformat() if isinstance(v, date) else v) for k, v in s.items()
-                        if k in ("status", "planned", "actual", "actual_day", "adherence", "execution", "adjusted")}
+                        if k in ("status", "planned", "actual", "actual_day", "adherence", "execution", "adjusted", "unit")}
     return out

@@ -20,6 +20,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
+      "unit": "min",
       "status": "done",
       "actual": 30.6,
       "actual_day": "2026-10-19",
@@ -71,6 +72,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
+      "unit": "min",
       "status": "short",
       "actual": 27.5,
       "actual_day": "2026-10-21",
@@ -115,6 +117,7 @@
      "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
+      "unit": "min",
       "status": "done",
       "actual": 93,
       "actual_day": "2026-10-23",
@@ -159,6 +162,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 8,
+      "unit": "km",
       "status": "done",
       "actual": 8.3,
       "actual_day": "2026-10-25",
@@ -195,6 +199,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
+      "unit": "min",
       "status": "done",
       "actual": 35.3,
       "actual_day": "2026-10-26",
@@ -239,6 +244,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
+      "unit": "min",
       "status": "done",
       "actual": 35.9,
       "actual_day": "2026-10-28",
@@ -299,6 +305,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 9,
+      "unit": "km",
       "status": "done",
       "actual": 9.2,
       "actual_day": "2026-11-01",
@@ -335,6 +342,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
+      "unit": "min",
       "status": "short",
       "actual": 32.6,
       "actual_day": "2026-11-02",
@@ -386,6 +394,7 @@
      "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
+      "unit": "min",
       "status": "over",
       "actual": 55.7,
       "actual_day": "2026-11-04",
@@ -430,6 +439,7 @@
      "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
+      "unit": "min",
       "status": "short",
       "actual": 84,
       "actual_day": "2026-11-06",
@@ -474,6 +484,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 10,
+      "unit": "km",
       "status": "short",
       "actual": 8.9,
       "actual_day": "2026-11-08",
@@ -510,6 +521,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 0,
+      "unit": "min",
       "status": "excused",
       "actual": 0.0,
       "actual_day": null,
@@ -559,6 +571,7 @@
      "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
+      "unit": "min",
       "status": "moved",
       "actual": 36.0,
       "actual_day": "2026-11-12",
@@ -619,6 +632,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 11,
+      "unit": "km",
       "status": "done",
       "actual": 10.7,
       "actual_day": "2026-11-15",
@@ -655,6 +669,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
+      "unit": "min",
       "status": "short",
       "actual": 18.7,
       "actual_day": "2026-11-16",
@@ -706,6 +721,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
+      "unit": "min",
       "status": "done",
       "actual": 20.0,
       "actual_day": "2026-11-18",
@@ -766,6 +782,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 7,
+      "unit": "km",
       "status": "over",
       "actual": 7.5,
       "actual_day": "2026-11-22",
@@ -802,6 +819,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
+      "unit": "min",
       "status": "done",
       "actual": 35.4,
       "actual_day": "2026-11-23",
@@ -853,6 +871,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 35,
+      "unit": "min",
       "status": "short",
       "actual": 33.0,
       "actual_day": "2026-11-25",
@@ -897,6 +916,7 @@
      "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
+      "unit": "min",
       "status": "missed",
       "actual": 0.0,
       "actual_day": null,
@@ -934,6 +954,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 9,
+      "unit": "km",
       "status": "done",
       "actual": 9.1,
       "actual_day": "2026-11-29",
@@ -970,6 +991,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20.0,
+      "unit": "min",
       "status": "done",
       "actual": 20.0,
       "actual_day": "2026-11-30",
@@ -1026,6 +1048,7 @@
      "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
+      "unit": "min",
       "status": "over",
       "actual": 53.7,
       "actual_day": "2026-12-02",
@@ -1062,6 +1085,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
+      "unit": "min",
       "status": "done",
       "actual": 20.2,
       "actual_day": "2026-12-03",
@@ -1114,6 +1138,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 10,
+      "unit": "km",
       "status": "short",
       "actual": 7.2,
       "actual_day": "2026-12-06",
@@ -1150,6 +1175,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
+      "unit": "min",
       "status": "done",
       "actual": 29.7,
       "actual_day": "2026-12-07",
@@ -1194,6 +1220,7 @@
      "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1228,6 +1255,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1257,6 +1285,7 @@
      "purpose": "Team sport: counts as hard training, so keep the next day easy.",
      "score": {
       "planned": 90,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1294,6 +1323,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 11,
+      "unit": "km",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1323,6 +1353,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 30,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1360,6 +1391,7 @@
      "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
      "score": {
       "planned": 50,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1389,6 +1421,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 20,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1434,6 +1467,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 12,
+      "unit": "km",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1463,6 +1497,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 25,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1500,6 +1535,7 @@
      "purpose": "Easy, conversational running: builds the aerobic base with little fatigue.",
      "score": {
       "planned": 25,
+      "unit": "min",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1553,6 +1589,7 @@
      "purpose": "The week's longest run, kept easy: builds endurance for the race distance.",
      "score": {
       "planned": 8,
+      "unit": "km",
       "status": "upcoming",
       "actual": 0.0,
       "actual_day": null,
@@ -1681,6 +1718,7 @@
    "purpose": "Comfortably hard: raises the pace you can hold for about an hour.",
    "score": {
     "planned": 50,
+    "unit": "min",
     "status": "upcoming",
     "actual": 0.0,
     "actual_day": null,

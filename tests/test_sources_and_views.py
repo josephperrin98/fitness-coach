@@ -120,3 +120,15 @@ def test_walks_are_not_a_last_session():
     out = dashboard(PLAN, CheckInStore(":memory:"), acts, [], today=date(2026, 10, 22),
                     weeks_back=1, weeks_ahead=0)
     assert out["last_session"]["kind"] == "football"
+
+
+def test_dashboard_sends_the_score_unit():
+    plan = plan_from_dict({
+        "goal": "half", "race_date": "2027-03-14",
+        "weeks": [{"start": "2026-10-19", "type": "foundation", "runs": 1, "km": 10,
+                   "sessions": [{"day": "2026-10-24", "kind": "long", "target": 10, "unit": "km"}]}],
+    })
+    out = dashboard(plan, CheckInStore(":memory:"), [], [], today=date(2026, 10, 21),
+                    weeks_back=1, weeks_ahead=0)
+    sat = next(d for d in out["days"] if d["date"] == "2026-10-24")
+    assert sat["planned"][0]["score"]["unit"] == "km"
